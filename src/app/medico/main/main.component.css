@@ -1,0 +1,86 @@
+.body {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+  z-index: 0;
+  position: relative;
+  top: 0;
+  transition: all 0.5s ease;
+  background: #ffffff;
+}
+
+.body-trimmed {
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
+}
+
+.body-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}
+
+
+/* Estilo para la cabecera */
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* Espacia los divs al principio y final */
+  align-items: center;
+  margin-left: 5rem;
+  /* Centra verticalmente los elementos */
+  width: 90%;
+  /* Asegura que ocupe todo el ancho de la ventana */
+  position: relative;
+  /* Fija la cabecera en la parte superior */
+  margin-top: 10px;
+  /* Pegada a la parte superior de la página */
+  left: 0;
+  /* Alineada a la izquierda de la página */
+  padding: 10px 0;
+  color: #1A4DB3;
+  /* Texto blanco */
+  z-index: 1000;
+  /* Asegura que esté encima de otros elementos */
+  border: #ffffff 2px;
+  background-color: #ffffff;
+}
+
+/* Estilo para el div izquierdo */
+.left-div {
+  margin-bottom: -3rem;
+  margin-left: 3rem;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Estilo para el div derecho */
+.right-div {
+  display: flex;
+  /* Usa Flexbox para las columnas dentro */
+  gap: 20px;
+  /* Espacio entre las dos columnas */
+  margin-bottom: -3.5rem;
+  margin-right: 2rem;
+}
+
+/* Estilo para cada columna */
+.column {
+  text-align: center;
+  flex: 1;
+  /* Las columnas se expanden igualmente */
+}
+
+.content {
+  margin-left: 8rem;
+  margin-right: 2%;
+}
+footer {
+  text-align: center; /* Centra el texto */
+  padding: 20px 23.12px; /* Espaciado vertical */
+  background-color:#F7F7F7; /* Color de fondo del footer (puedes cambiarlo) */
+  color: #0039AA; /* Color del texto */
+  font-size: 14px; /* Tamaño de fuente */
+}
+
+footer p {
+  margin: 0; /* Elimina márgenes adicionales */
+}

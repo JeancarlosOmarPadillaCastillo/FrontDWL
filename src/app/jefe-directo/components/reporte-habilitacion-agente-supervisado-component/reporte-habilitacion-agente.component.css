@@ -1,0 +1,163 @@
+.cabecera-card {
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos a los extremos */
+  align-items: center; /* Centra los elementos verticalmente */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  color: #005cbf;
+}
+
+.cabecera-card__left {
+  /* Alineado automáticamente a la izquierda */
+}
+
+.cabecera-card__right {
+  display: flex;
+  align-items: center; /* Alinea el ícono y el texto en el centro verticalmente */
+}
+
+.cabecera-card__right i {
+  margin-right: 8px; /* Espacio entre el ícono y el texto */
+}
+h5{
+  margin-top:-10px;
+}
+.centainer-principal{
+  width:95%;
+  text-align:center;
+
+}
+/* Contenedor principal */
+.container {
+  display: grid;
+  grid-template-rows: auto auto auto auto; /* 4 filas automáticas */
+  gap: 5px; /* Espacio entre las filas */
+}
+
+/* Fila vacía (Fila 1 y Fila 4) */
+.row-1{ /* Fondo gris para ver las filas */
+  height: 5px; /* Altura de cada fila (ajustable) */
+  text-align:start;
+}
+
+/* Fila 2 y Fila 3 con 3 columnas */
+.row-2, .row-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas de igual tamaño */
+  gap: 5px; /* Espacio entre las columnas */
+}
+
+.column {
+  padding: 20px;
+  text-align: center;
+}
+
+
+
+/* Contenedor con 2 filas */
+.container2 {
+  display: grid;
+  grid-template-rows: 1fr 1fr; /* Dos filas de igual altura */
+  gap: 5px; /* Espacio entre las filas */
+  padding: 5px;
+  background-color: #f9f9f9; /* Fondo del contenedor */
+}
+
+/* Estilo para cada fila */
+.row11 {
+  height: 25px; /* Altura de cada fila (ajustable) */
+  display: flex;
+  justify-content: left;
+  align-items:flex-start;
+}
+
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+  line-height: 1;
+}
+
+/* Estilo del botón */
+.search-button {
+  display: inline-flex; /* Para alinear el texto y el ícono horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  background-color: #1A4DB3; /* Fondo azul */
+  color: white; /* Texto blanco */
+  border: none; /* Sin bordes */
+  padding: 10px 20px; /* Espaciado interno del botón */
+  font-size: 16px; /* Tamaño de la fuente */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+}
+
+.search-button i {
+  margin-left: 8px; /* Espacio entre el texto y el ícono */
+  font-size: 20px; /* Tamaño del ícono */
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* Cambia el fondo a un azul más oscuro al hacer hover */
+}
+
+/* Cabecera de la tabla con fondo azul */
+.mat-header-row {
+  background-color: #1976d2; /* Color azul */
+  color: white; /* Cambiar el color del texto a blanco */
+}
+
+/* Estilo para las filas alternadas */
+.mat-row:nth-child(odd) {
+  background-color: white; /* Fila impar (primera, tercera, etc.) con fondo blanco */
+}
+
+.mat-row:nth-child(even) {
+  background-color: #e3f2fd; /* Fila par (segunda, cuarta, etc.) con fondo celeste */
+}
+
+/* Opcional: Cambiar color cuando se selecciona una fila */
+.mat-row.selected {
+  background-color: #90caf9; /* Color celeste más claro */
+}
+
+
+/* Opcional: Cambiar color cuando se selecciona una fila */
+.mat-row.selected {
+  background-color: #90caf9; /* Color celeste más claro */
+}
+
+/* Estilo para el círculo verde */
+.circle {
+  width: 15px;              /* Ancho del círculo */
+  height: 15px;             /* Alto del círculo */
+  border-radius: 50%;       /* Hace el círculo redondo */
+  background-color: green;  /* Color de fondo verde */
+  margin-right: 8px;        /* Espacio entre el círculo y el texto */
+}
+.fila {
+  display: flex;
+  /* Esto hace que los elementos dentro de este div se acomoden en una fila */
+  align-items: flex-start;
+  /* Alinea los elementos al principio del eje vertical */
+  margin-top: -1rem;
+  margin-bottom: 0.5rem;
+}
+
+.componente {
+  margin-right: 0px;
+  /* Espacio entre los componentes */
+  padding: 0px;
+  color: #1A4DB3;
+}
+.action-button {
+  display: inline-flex; /* Para alinear el texto y el ícono horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  background-color: #ffffff; /* Fondo azul */
+  padding: 10px 50px; /* Espaciado interno del botón */
+  font-size: 16px; /* Tamaño de la fuente */
+  border-radius: 5px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor al pasar el ratón */
+  transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+  border: 2px solid #005cbf !important;
+  color: #005cbf;
+  font-weight: bold;
+}

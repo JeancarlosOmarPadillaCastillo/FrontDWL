@@ -1,0 +1,178 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión De Ingresos a Agentes Supervisados</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Consultar habilitación de trabajadores</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Consultar información del trabajador</strong></h5>
+<div class="centainer-principal">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <div class="container">
+        <!-- Fila 1 (vacía) -->
+        <div class="row row-1">
+          <div class="cabecera-card">
+            <!-- Div con el texto "Buscar Solicitud" alineado a la izquierda -->
+            <div class="cabecera-card__left">
+              <p style="color:black;">Buscar Solicitud</p>
+            </div>
+
+            <!-- Div con el ícono y el texto "Búsqueda avanzada" alineado a la derecha -->
+            <div  class="cabecera-card__right">
+              <i (click)="openDialogBusqueda()"  class="fas fa-search"></i>
+              <p (click)="openDialogBusqueda()" >Búsqueda avanzada</p>
+            </div>
+          </div>
+
+        </div>
+        <!-- Fila 2 (con 3 columnas) -->
+        <div class="row row-2">
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Tipo de documento</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                  <mat-select>
+                    <mat-option value="option1">Option 1</mat-option>
+                    <mat-option value="option2">Option2</mat-option>
+                    <mat-option value="option3">Option 3</mat-option>
+                  </mat-select>
+              </div>
+            </div>
+
+          </div>
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Numero de documento</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                  <input matInput type="text"/>
+              </div>
+            </div>
+
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11"></div>
+              <!-- Fila 2 -->
+              <div class="row11">
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row row-3">
+          <div class="column">
+            <div class="container2">
+              <div class="botones-container">
+                <button class="boton-buscar">
+                  <i class="material-icons">search</i> Buscar
+                </button>
+                <button class="boton-limpiar">Limpiar</button>
+              </div>
+
+
+
+            </div>
+          </div>
+          <div class="column"></div>
+          <div class="column"></div>
+        </div>
+
+      </div>
+
+    </mat-card-content>
+  </mat-card>
+
+  <br>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Tipo de documento </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Numero de documento </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Apellido paterno </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="symbol">
+      <th mat-header-cell *matHeaderCellDef> Apellido materno </th>
+      <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    </ng-container>
+
+    <!-- New Age Column -->
+    <ng-container matColumnDef="age">
+      <th mat-header-cell *matHeaderCellDef> Nombres</th>
+      <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+    </ng-container>
+
+    <!-- New Address Column -->
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef> Cargo </th>
+      <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+    </ng-container>
+
+    <!-- New Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef> Gerencia </th>
+      <td mat-cell *matCellDef="let element" >
+        {{element.email}}
+
+      </td>
+    </ng-container>
+
+
+    <!-- New Phone Column -->
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell *matHeaderCellDef> Oficina regional</th>
+      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+    </ng-container>
+
+    <!-- New Country Column -->
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef> Acción </th>
+      <th (click)="openDialogAccion()"  mat-cell *matCellDef="let item">
+        <div class="animacion-acciones">
+
+          <p class="parrafo"><mat-icon>keyboard_arrow_down</mat-icon></p>
+          <p class="parrafo"><mat-icon>mail</mat-icon></p>
+        </div>
+      </th>
+    </ng-container>
+
+    <!-- Header row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+    <!-- Data rows -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>
+

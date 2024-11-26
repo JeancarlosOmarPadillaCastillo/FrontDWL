@@ -1,0 +1,28 @@
+<div class="contenedor-titulo">
+  <p>Éxito</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada" >Cerrar</button>
+  </mat-dialog-actions>
+</div>
+
+<mat-dialog-content>
+  <h3>Se actualizará el registro seleccionado con los datos ingresos</h3>
+  <h5>¿Desea continuar?</h5>
+
+  <div class="celda">
+    <div class="contenedor-dos-filas">
+
+    </div>
+  </div>
+  <div class="celda">
+  </div>
+
+
+</mat-dialog-content>
+<!-- Div inferior con los botones "Salir" y "Buscar" -->
+<div class="contenedor-botones">
+
+  <button mat-dialog-close  class="boton-buscar">NO</button>
+  <button mat-dialog-close (click)="openDialog()" class="boton-buscar">SI</button>
+</div>
+

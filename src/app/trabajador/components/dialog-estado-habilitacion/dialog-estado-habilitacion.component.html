@@ -1,0 +1,126 @@
+<div class="contenedor-titulo">
+  <p>Solicitud</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada" >Cerrar</button>
+  </mat-dialog-actions>
+</div>
+
+<mat-dialog-content>
+
+
+
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <h3>Datos generales</h3>
+      <!-- Contenedor con 2 filas y 2 columnas -->
+      <div class="contenedor-grid">
+
+        <div class="celda">
+          <div class="contenedor-dos-filas">
+            <!-- Primera fila -->
+            <div class="fila"><p>Agente supervisado</p></div>
+
+            <!-- Segunda fila -->
+            <div class="fila">
+              <p>--</p>
+            </div>
+          </div>
+        </div>
+        <div class="celda">
+          <div class="contenedor-dos-filas">
+            <!-- Primera fila -->
+            <div class="fila"><p>Sector</p></div>
+
+            <!-- Segunda fila -->
+            <div class="fila">
+              <p>--</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="celda">
+          <div class="contenedor-dos-filas">
+            <!-- Primera fila -->
+            <div class="fila"><p>Visitante</p></div>
+
+            <!-- Segunda fila -->
+            <div class="fila">
+              <p>--</p>
+            </div>
+          </div>
+        </div>
+        <div class="celda">
+          <div class="contenedor-dos-filas">
+            <!-- Primera fila -->
+            <div class="fila"><p>Fecha de visita programada</p></div>
+
+            <!-- Segunda fila -->
+            <div class="fila">
+              <p>--</p>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+
+    </mat-card-content>
+  </mat-card>
+
+  <p>Usted cuenta con los siguientes requisitos para subsanar</p>
+
+
+  <br>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Requisitos </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Status </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Archivo de sustento </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- New Country Column -->
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef> Acción </th>
+      <th mat-cell *matCellDef="let item">
+        <div class="animacion-acciones">
+
+
+        </div>
+      </th>
+    </ng-container>
+
+    <!-- Header row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+    <!-- Data rows -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+
+</mat-dialog-content>
+
+
+
+<!-- Div inferior con los botones "Salir" y "Buscar" -->
+<div class="contenedor-botones">
+
+  <button mat-dialog-close class="boton-buscar">Cerrar</button>
+  <button (click)="openDialog()" mat-dialog-close class="boton-buscar">Confirmar subsanación</button>
+</div>
+
+

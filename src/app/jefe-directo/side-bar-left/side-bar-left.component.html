@@ -1,0 +1,45 @@
+<div class="sidenav" [ngClass]="isLeftSidebarCollapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">
+      <i class="fa-solid fa-compass"></i>
+    </button>
+
+    <!-- Solo se muestra si no está colapsado -->
+    <div *ngIf="!isLeftSidebarCollapsed" class="logo-text">
+      LOGO
+    </div>
+
+    <!-- Botón de cerrar -->
+    <button  *ngIf="!isLeftSidebarCollapsed"  class="btn-close" (click)="closeSidenav()">
+      <i  style="color:black" class="fa-solid fa-angle-left"></i>
+    </button>
+  </div>
+
+
+
+  <div class="sidenav-nav">
+    <div class="sidenav-nav-item" *ngFor="let item of items">
+      <a class="sidenav-nav-link" [routerLink]="item.routeLink" routerLinkActive="active"
+         [routerLinkActiveOptions]="{ exact: true }">
+        <i  class="sidenav-link-icon" [class]="item.icon"></i>
+        <span class="sidenav-link-text" *ngIf="!isLeftSidebarCollapsed">{{ item.label }}</span>
+        <button class="submenu-toggle" *ngIf="item.children" (click)="toggleSubMenu(item)">
+          <i *ngIf="!isLeftSidebarCollapsed" style="color:#ffffff" class="fa-solid" [class]="isSubMenuOpen(item) ? 'fa-caret-up' : 'fa-caret-down'"></i>
+        </button>
+      </a>
+
+      <!-- Submenú, sin decoración de lista -->
+      <div *ngIf="!isLeftSidebarCollapsed">
+        <div *ngIf="isSubMenuOpen(item)" class="sidenav-submenu">
+          <div *ngFor="let children of item.children" class="sidenav-submenu-item">
+            <a  [routerLink]="children.routeLink" routerLinkActive="active"
+                [routerLinkActiveOptions]="{ exact: true }">
+              {{ children.label }}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

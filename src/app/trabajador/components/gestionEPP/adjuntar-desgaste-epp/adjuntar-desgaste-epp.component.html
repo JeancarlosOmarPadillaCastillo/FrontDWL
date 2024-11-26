@@ -1,0 +1,68 @@
+<div class="contenedor-titulo">
+  <p>Subir evidencia</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada"><strong>Cerrar</strong></button>
+  </mat-dialog-actions>
+</div>
+<mat-dialog-content>
+  <!-- Botón para seleccionar archivo -->
+  <div class="centered-bordered-div">
+    <button class="full-width-button" (click)="fileInput.click()">
+      Selecciona o arrastra el archivo aquí
+      <mat-icon>cloud_upload</mat-icon>
+    </button>
+    <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none;" />
+    <p>Archivo de baja calidad no será aceptado. El tamaño debe ser menor a 5 MB.</p>
+  </div>
+
+  <!-- Lista de archivos cargados -->
+  <div *ngFor="let archivo of archivos" class="archivo-container">
+    <div class="archivo-header">
+      <button (click)="eliminarArchivo(archivo)" class="cerrar-btn">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="archivo-content">
+      <div class="archivo-preview-contenedor">
+        <img *ngIf="archivo.isImage" [src]="archivo.preview" alt="Vista previa" class="archivo-preview" />
+        <iframe
+          *ngIf="archivo.isPDF"
+          [src]="archivo.preview"
+          class="archivo-preview"
+          title="Vista previa de PDF"
+          (error)="onPreviewError(archivo)">
+        </iframe>
+        <div *ngIf="archivo.previewError" class="archivo-preview-icon">
+          <mat-icon>picture_as_pdf</mat-icon>
+        </div>
+      </div>
+      <div class="archivo-detalles">
+        <p><strong>Nombre:</strong> {{ archivo.file.name }}</p>
+        <p><strong>Tamaño:</strong> {{ (archivo.file.size / 1024) | number: '1.0-0' }} KB</p>
+        <button
+          *ngIf="!archivo.cargando && !archivo.subido"
+          (click)="subirArchivo(archivo)"
+          class="boton-subir">
+          Subir Archivo
+        </button>
+        <mat-progress-spinner
+          *ngIf="archivo.cargando"
+          mode="indeterminate"
+          diameter="20">
+        </mat-progress-spinner>
+        <p *ngIf="archivo.subido" class="archivo-subido">¡Archivo subido!</p>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<br>
+<!-- Botones inferiores -->
+<div class="contenedor-botones">
+  <button mat-dialog-close class="boton-salir">Salir</button>
+  <button *ngFor="let archivo of archivos"
+          (click)="subirArchivo(archivo)"
+          class="boton-buscar"
+          [disabled]="archivo.cargando || archivo.subido">
+    Subir Archivo
+  </button></div>

@@ -1,0 +1,125 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión EPP</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Revisar solicitudes de EPP</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Revisar solicitudes de EPP</strong></h5>
+
+
+
+
+<mat-card appearance="outlined" class="card">
+  <mat-card-content>
+
+    <div class="cabecera-card">
+      <!-- Título del card -->
+      <div class="cabecera-card__left">
+        <p style="color:black;">Datos del trabajador</p>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Sección con 4 columnas -->
+      <div class="row">
+        <div class="column">Tipo de documento:</div>
+        <div class="column">Número de documento:</div>
+        <div class="column">Apellidos y nombres:</div>
+        <div class="column">Puesto de trabajo:</div>
+      </div>
+      <div class="row">
+        <div class="column"><strong>{{ datosRecibidos?.tipoDocumento}}</strong></div>
+        <div class="column"><strong>{{ datosRecibidos?.documento }}</strong></div>
+        <div class="column"><strong>{{ datosRecibidos?.apellidoPaterno }} {{ datosRecibidos?.apellidoMaterno }}, {{ datosRecibidos?.nombre }}</strong></div>
+        <div class="column"><strong>{{ datosRecibidos?.puesto }}</strong></div>
+      </div>
+
+      <!-- Botón debajo de las columnas -->
+
+    </div>
+  </mat-card-content>
+</mat-card>
+<br>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="toggleAll($event)" [checked]="isAllSelected()" [indeterminate]="isSomeSelected() && !isAllSelected()"></mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-checkbox
+        [checked]="element.estadoSolicitud !== 'Pendiente'"
+        [disabled]="element.estadoSolicitud !== 'Pendiente'"
+        (change)="toggleSelection(element)">
+      </mat-checkbox>
+
+    </td>
+  </ng-container>
+
+
+  <!-- Tipo EPP Column -->
+  <ng-container matColumnDef="tipoEppDescripcion">
+    <th mat-header-cell *matHeaderCellDef> Tipo EPP </th>
+    <td mat-cell *matCellDef="let element"> {{ element.tipoEppDescripcion }} </td>
+  </ng-container>
+
+  <!-- Cantidad Aprobada Column -->
+  <ng-container matColumnDef="cantidadAprobada">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let element"> {{element.cantidadSolicitada}} </td>
+  </ng-container>
+
+  <!-- Motivo Descripción Column -->
+  <ng-container matColumnDef="motivoDescripcion">
+    <th mat-header-cell *matHeaderCellDef> Motivo de Solicitud </th>
+    <td mat-cell *matCellDef="let element"> {{ element.motivoDescripcion }} </td>
+  </ng-container>
+
+  <!-- Nueva Actividad Column -->
+  <ng-container matColumnDef="nuevaActividad">
+    <th mat-header-cell *matHeaderCellDef> Nueva Actividad </th>
+    <td mat-cell *matCellDef="let element"> {{ element.nuevaActividad || '--' }} </td>
+  </ng-container>
+
+  <!-- Estado Solicitud Column -->
+  <ng-container matColumnDef="estadoSolicitud">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{ element.estadoSolicitud }} </td>
+  </ng-container>
+  <!-- Header row -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+  <!-- Data rows -->
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+</table><mat-paginator [length]="100"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5, 10, 25, 100]"
+                       aria-label="Seleccionar por pagina">
+</mat-paginator>
+<div class="button-container">
+  <button routerLink="/revisar-solicitud-epp" mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-right-from-bracket"></i></span> <!-- Icono de búsqueda -->
+    Regresar
+  </button>
+  <button (click)="aprobar()" mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-file-circle-check"></i></span> <!-- Icono de guardar -->
+    Aprobar
+  </button>
+  <button mat-fab extended (click)="openDialogRechazo()">
+    <span class="button-icon"><i  style="color:white" class="fa-regular fa-file-excel"></i></span> <!-- Icono de cancelar -->
+    Rechazar
+  </button>
+</div>

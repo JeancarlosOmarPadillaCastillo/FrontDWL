@@ -1,0 +1,171 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión EPP</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Revisar solicitudes de EPP</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Revisar solicitudes de EPP</strong></h5>
+<mat-card appareance="outlined" class="card">
+  <mat-card-content>
+    <div class="container">
+      <div class="cabecera-card">
+        <!-- Div con el texto "Buscar Solicitud" alineado a la izquierda -->
+        <div class="cabecera-card__left">
+          <p style="color:black;">Busqueda de Solicitudes</p>
+        </div>
+
+        <!-- Div con el ícono y el texto "Búsqueda avanzada" alineado a la derecha -->
+        <div class="header-right">
+          <button mat-button (click)="openDialog()">
+            <i class="fa-solid fa-bars"></i> Búsqueda avanzada</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="label">Tipo de documento</div>
+          <mat-form-field appearance="outline">
+            <mat-label>Tipo de documento</mat-label>
+            <mat-select [formControl]="tipoDocumentoFilter">
+              <mat-option value="">Todos</mat-option>
+              <mat-option value="D">DNI</mat-option>
+              <mat-option value="CNE">CNE</mat-option>
+              <mat-option value="Otros">Otros</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <div class="label">Numero de documento</div>
+          <mat-form-field class="value" appearance="outline">
+            <input matInput [formControl]="numeroDocumentoFilter" placeholder="Ingrese número de documento" />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <div class="label">Estado</div>
+          <mat-form-field class="value">
+            <mat-select [formControl]="estadoFilter">
+              <mat-option value="">Todos</mat-option>
+              <mat-option value="pendiente">Pendiente</mat-option>
+              <mat-option value="aprobado">Aprobado</mat-option>
+              <mat-option value="aprobado parcialmente">Aprobado parcialmente</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="label">Fecha de solicitud</div>
+          <mat-form-field class="example-form-field">
+            <mat-date-range-input [formGroup]="campaignOne" [rangePicker]="campaignOnePicker">
+              <input matStartDate placeholder="Fecha inicio" formControlName="start">
+              <input matEndDate placeholder="Fecha fin" formControlName="end">
+            </mat-date-range-input>
+            <mat-datepicker-toggle matIconSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
+            <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <div class="label"></div>
+
+        </div>
+        <div class="col">
+          <div class="label"></div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="animacion-acciones">
+            <button mat-fab extended color="primary">
+              <mat-icon>search</mat-icon> Buscar</button>
+            <button style="background-color:#EAECF0; color:blue;" mat-fab extended color="primary">
+              Limpiar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<br>
+<p style="margin:0;">Listado de solicitudes</p>
+<br>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+  <ng-container matColumnDef="docType">
+    <th mat-header-cell *matHeaderCellDef> Tipo de documento </th>
+    <td mat-cell *matCellDef="let element"> {{element.tipoDocumento}} </td>
+  </ng-container>
+  <ng-container matColumnDef="docNro">
+    <th mat-header-cell *matHeaderCellDef> Número de documento </th>
+    <td mat-cell *matCellDef="let element"> {{element.documento}} </td>
+  </ng-container>
+  <ng-container matColumnDef="lnamePat">
+    <th mat-header-cell *matHeaderCellDef> Apellido paterno </th>
+    <td mat-cell *matCellDef="let element"> {{element.apellidoPaterno}} </td>
+  </ng-container>
+  <ng-container matColumnDef="lnameMat">
+    <th mat-header-cell *matHeaderCellDef> Apellido materno </th>
+    <td mat-cell *matCellDef="let element"> {{element.apellidoMaterno}} </td>
+  </ng-container>
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let element"> {{element.nombre}} </td>
+  </ng-container>
+  <ng-container matColumnDef="estado">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{element.estadoProceso}} </td>
+  </ng-container>
+  <ng-container matColumnDef="fecha">
+    <th mat-header-cell *matHeaderCellDef> Fecha solicitud </th>
+    <td mat-cell *matCellDef="let element"> {{element.fechaSolicitud}} </td>
+  </ng-container>
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef aria-label="row action">&nbsp;</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="animacion-acciones">
+        <button mat-button (click)="expandedElement = expandedElement === element ? null : element">
+          <mat-icon >
+            {{expandedElement === element ? 'expand_less' : 'expand_more'}}
+          </mat-icon>
+        </button>
+        <button (click)="agregarFavorito(element)" mat-button routerLink="/revisar-solicitud-epp-sst-2">
+          <i class="fa-solid fa-right-to-bracket"></i>
+        </button>
+
+      </div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="definitionCellExpanded.length">
+      <div class="table-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <table mat-table [dataSource]="[{}]" class="table-detail">
+          <ng-container matColumnDef="names">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Puesto de Trabajo </th>
+            <td mat-cell *matCellDef="let data"> {{element.puesto}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="definitionCellExpanded"></tr>
+          <tr mat-row *matRowDef="let row; columns: definitionCellExpanded;"></tr>
+        </table>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="definitionCell"></tr>
+  <tr mat-row *matRowDef="let element; columns: definitionCell;" class="table-element-row"
+      [class.table-expanded-row]="expandedElement === element"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table-detail-row"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons
+               [pageSize]="10" [hidePageSize]="false" [length]="dataSource.data.length">
+</mat-paginator>

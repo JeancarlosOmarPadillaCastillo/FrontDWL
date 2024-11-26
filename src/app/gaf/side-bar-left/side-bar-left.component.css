@@ -1,0 +1,150 @@
+.sidenav {
+  background: #1A4DB3;
+  transition: all 0.5s ease;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0; /* Cambiado de right: 0 a left: 0 para alinearla a la izquierda */
+  width: 20.5625rem;
+  height: 100vh;
+  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+}
+
+
+.sidenav-collapsed {
+  width: 5rem;
+}
+
+.sidenav .logo-container {
+  display: flex;
+  background-color: #fff;
+  align-items: center;   /* Alinea verticalmente los elementos */
+  justify-content: space-between; /* Distribuye los elementos al máximo */
+  padding: 0.938rem 0.938rem 0.900rem 0.938rem;
+  width: auto;
+}
+
+.sidenav .logo-container .logo {
+  background: #fff;
+  text-align: center;
+  width: 3rem;
+  min-width: 3rem;
+  border-radius: 0.313rem;
+  padding: 0.313rem;
+  font-size: 24px;
+  font-weight: 900;
+  cursor: pointer;
+  border: none;
+}
+
+.sidenav .logo-container .logo-text {
+  font-size: 15px;
+  font-weight: 700;
+  color: #8b0101;
+  margin-left: 1rem;  /* Ajuste para reducir el espacio */
+}
+
+.sidenav .logo-container .btn-close {
+  cursor: pointer;
+  width: 5rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: transparent;
+  border: none;
+}
+
+.sidenav .logo-container .btn-close .fa-times {
+  color: #fff;
+  font-size: 18px;
+}
+
+.sidenav-nav {
+  list-style: none;
+  padding: 0.638rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: calc(100% - 3.65rem);
+  cursor: pointer;
+}
+
+.sidenav-nav .sidenav-nav-item {
+  width: 100%;
+  margin-bottom: 0.5px;
+}
+
+.sidenav-nav .sidenav-nav-item .sidenav-nav-link {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+  width: 100%;
+  color: #f3f3f3;
+  text-decoration: none;
+  border-radius: 0.625rem;
+  transition: all 0.3s ease;
+}
+
+.sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-icon {
+  font-size: 22px;
+  width: 2rem;
+  min-width: 2rem;
+  text-align: left;
+  padding: 12px;
+}
+
+.sidenav-nav .sidenav-nav-item .sidenav-nav-link .sidenav-link-text {
+  margin-left: -0.5rem;
+}
+
+.sidenav-nav .sidenav-nav-item:hover .sidenav-nav-link {
+  background-color: #1A4DB3;
+  color: #fff;
+}
+
+.active {
+  background-color: #1A4DB3;
+}
+
+.active .sidenav-link-icon, .active .sidenav-link-text {
+  color: #fff;
+}
+
+.sidenav-nav {
+  font-size: 15px;
+}
+
+/* Submenú - Sin decoración de lista */
+.sidenav-submenu {
+  display: flex;
+  flex-direction: column;
+  padding-left: 1rem;  /* Alinea más a la izquierda */
+  background-color: transparent; /* Cambia este color según tu diseño */
+  margin-top: 0.5rem;  /* Espacio entre el ítem principal y el submenú */
+}
+
+.sidenav-submenu-item {
+  padding: 0.5rem 0; /* Añade un poco de espacio entre los elementos del submenú */
+}
+
+.sidenav-submenu-item a {
+  display: block;
+  color: #f3f3f3;
+  text-decoration: none;
+  padding-left: 1rem;  /* Indenta los submenús */
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.sidenav-nav-item .submenu-toggle {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.sidenav-nav-item .submenu-toggle:focus {
+  outline: none;
+}
+

@@ -1,0 +1,138 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestionar Inventario</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Asignación de EPP</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Registro de Ingreso</strong></h5>
+<mat-card appareance="outlined" class="card">
+  <mat-card-content>
+    <div class="container">
+
+      <div class="row">
+        <div class="col">
+          <div class="label">Tipo de EPP</div>
+          <mat-form-field class="value">
+            <mat-select placeholder="Seleccionar tipo de documento">
+              <mat-option value="opt1">Option 1</mat-option>
+              <mat-option value="opt2">Option 2</mat-option>
+              <mat-option value="opt3">Option 3</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <div class="label">Cantidad(*)</div>
+          <mat-form-field class="value">
+            <input matInput type="text" />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <div class="label">Lote(*)</div>
+          <mat-form-field class="value">
+            <input matInput type="text" />
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="label">Fecha de Vencimiento</div>
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+      </div>
+      <div class="col">
+        <div class="label"></div>
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="animacion-acciones">
+          <button mat-fab extended color="primary">
+            <mat-icon>add</mat-icon> Agregar</button>
+          <button style="background-color:#EAECF0; color:blue;" mat-fab extended color="primary">
+            Limpiar</button>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<br>
+<p>Listado de solicitudes</p>
+<br>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> Tipo de EPP</th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> Lote </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  </ng-container>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="provincia">
+    <th mat-header-cell *matHeaderCellDef> Provincia</th>
+    <td mat-cell *matCellDef="let element"> {{element.provincia}} </td>
+  </ng-container>
+
+
+  <!-- Weight Column -->
+
+  <!-- New Country Column -->
+  <ng-container matColumnDef="accion">
+    <th mat-header-cell *matHeaderCellDef> Acción </th>
+    <th mat-cell *matCellDef="let item">
+      <div class="animacion-acciones">
+
+        <p class="parrafo"><mat-icon>edit</mat-icon></p>
+        <p class="parrafo"><mat-icon>delete</mat-icon></p>
+      </div>
+    </th>
+  </ng-container>
+
+  <!-- Header row -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+  <!-- Data rows -->
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<div class="button-container">
+  <button routerLink="/gestionar-inventario-2" mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-right-from-bracket"></i></span> <!-- Icono de búsqueda -->
+    Regresar
+  </button>
+  <button mat-fab extended disabled>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-file-circle-check"></i></span> <!-- Icono de guardar -->
+    Registrar
+  </button>
+</div>

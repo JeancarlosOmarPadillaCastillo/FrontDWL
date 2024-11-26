@@ -1,0 +1,190 @@
+/* Contenedor principal */
+.contenedor-principal {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 300px; /* Ajusta el ancho según tus necesidades */
+}
+
+/* Título en la parte superior */
+/* Estilo del contenedor con el título y el botón */
+.contenedor-titulo {
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos a los extremos */
+  align-items: center; /* Alinea verticalmente los elementos */
+  margin-bottom: 10px; /* Espacio debajo del título */
+  background-color: #0056b3; /* Fondo azul */
+  color: white; /* Texto en blanco */
+  padding: 10px 20px; /* Relleno para que no esté pegado al borde */
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+/* Estilo para el párrafo */
+.contenedor-titulo p {
+  margin: 0; /* Elimina el margen por defecto */
+  font-weight: bold; /* Negrita */
+}
+
+/* Estilo del botón */
+.boton-avanzada {
+  padding: 8px 16px; /* Relleno del botón */
+  background-color: #1a4db3; /* Fondo del botón */
+  color: white; /* Texto en blanco */
+  border: none; /* Sin bordes */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a mano */
+}
+
+.boton-avanzada:hover {
+  background-color: #0056b3; /* Cambia el color de fondo cuando el mouse está sobre el botón */
+}
+
+
+/* Contenedor de la cuadrícula 2x2 */
+.contenedor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+  grid-template-rows: auto auto; /* Dos filas automáticas */
+  gap: 10px; /* Espacio entre las celdas */
+  margin-bottom: 15px; /* Espacio debajo de la cuadrícula */
+}
+
+/* Estilo de cada celda */
+.celda {
+  padding: 10px;
+  border-radius: 4px;
+  text-align: start;
+}
+
+/* Contenedor de los botones */
+.contenedor-botones {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  align-items:center;
+  justify-content:center;
+  margin: 0 0 30px 0
+
+}
+
+/* Botón "Salir" */
+.boton-salir {
+  padding: 10px 20px;
+  background-color: #EAECF0; /* Color de fondo */
+  color: #0056b3; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Botón "Buscar" */
+.boton-buscar {
+  padding: 10px 20px;
+  background-color: #1A4DB3; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-salir:hover {
+  background-color: #d6d8db;
+}
+
+.boton-buscar:hover {
+  background-color: #0056b3;
+}
+/* Contenedor principal */
+.contenedor-principal {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 300px; /* Ajusta el ancho según tus necesidades */
+}
+
+/* Título en la parte superior */
+/* Estilo del contenedor con el título y el botón */
+.contenedor-titulo {
+  display: flex;
+  justify-content: space-between; /* Alinea los elementos a los extremos */
+  align-items: center; /* Alinea verticalmente los elementos */
+  margin-bottom: 10px; /* Espacio debajo del título */
+  background-color: #0056b3; /* Fondo azul */
+  color: white; /* Texto en blanco */
+  padding: 10px 20px; /* Relleno para que no esté pegado al borde */
+  width: 100%; /* Ocupa todo el ancho disponible */
+}
+
+/* Estilo para el párrafo */
+.contenedor-titulo p {
+  margin: 0; /* Elimina el margen por defecto */
+  font-weight: bold; /* Negrita */
+}
+
+/* Estilo del botón */
+.boton-avanzada {
+  padding: 8px 16px; /* Relleno del botón */
+  background-color: #1a4db3; /* Fondo del botón */
+  color: white; /* Texto en blanco */
+  border: none; /* Sin bordes */
+  border-radius: 4px; /* Bordes redondeados */
+  cursor: pointer; /* Cambia el cursor a mano */
+}
+
+.boton-avanzada:hover {
+  background-color: #0056b3; /* Cambia el color de fondo cuando el mouse está sobre el botón */
+}
+
+
+/* Contenedor de la cuadrícula 2x2 */
+.contenedor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas de igual tamaño */
+  grid-template-rows: auto auto; /* Dos filas automáticas */
+  gap: 10px; /* Espacio entre las celdas */
+  margin-bottom: 15px; /* Espacio debajo de la cuadrícula */
+}
+
+/* Estilo de cada celda */
+.celda {
+  padding: 10px;
+  border-radius: 4px;
+  text-align: start;
+}
+
+/* Contenedor de los botones */
+.contenedor-botones {
+  display: flex;
+  gap: 10px; /* Espacio entre los botones */
+  align-items:center;
+  justify-content:center;
+  margin: 0 0 30px 0
+
+}
+
+/* Botón "Salir" */
+.boton-salir {
+  padding: 10px 20px;
+  background-color: #EAECF0; /* Color de fondo */
+  color: #0056b3; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Botón "Buscar" */
+.boton-buscar {
+  padding: 10px 20px;
+  background-color: #1A4DB3; /* Color de fondo */
+  color: white; /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-salir:hover {
+  background-color: #d6d8db;
+}
+
+.boton-buscar:hover {
+  background-color: #0056b3;
+}

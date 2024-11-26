@@ -1,0 +1,46 @@
+
+<div class="contenedor-titulo">
+  <p>Información de visitante</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada" >Cerrar</button>
+  </mat-dialog-actions>
+</div>
+
+<mat-dialog-content>
+  <!-- Contenedor con 2 filas y 2 columnas -->
+  <div class="contenedor-grid">
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila"><p>Tipo de requisito</p></div>
+
+        <!-- Segunda fila -->
+        <div class="fila">
+          <mat-select>
+            <mat-option value="option1">Option 1</mat-option>
+            <mat-option value="option2">Option2</mat-option>
+            <mat-option value="option3">Option 3</mat-option>
+          </mat-select>
+        </div>
+      </div>
+    </div>
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila"><p>Requisito</p></div>
+
+        <!-- Segunda fila -->
+        <div class="fila">
+            <input matInput type="text" />
+        </div>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<!-- Div inferior con los botones "Salir" y "Buscar" -->
+
+<div class="contenedor-botones">
+  <button mat-dialog-close class="boton-salir">Cerrar</button>
+  <button class="boton-buscar">Guardar</button>
+</div>

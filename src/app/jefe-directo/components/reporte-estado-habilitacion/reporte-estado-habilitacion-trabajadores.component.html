@@ -1,0 +1,170 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión De Ingresos a Agentes Supervisados</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Reporte de Estado de Habilitación de Trabajadores</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Reporte de Estado de Habilitación de Trabajadores</strong></h5>
+<div class="centainer-principal">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <div class="container">
+        <!-- Fila 1 (vacía) -->
+        <div class="row row-1">
+          <div class="cabecera-card">
+            <!-- Div con el texto "Buscar Solicitud" alineado a la izquierda -->
+            <div class="cabecera-card__left">
+              <p style="color:black;">Filtros</p>
+            </div>
+
+            <!-- Div con el ícono y el texto "Búsqueda avanzada" alineado a la derecha -->
+            <div class="cabecera-card__right">
+              <i (click)="openDialog()" class="fas fa-search"></i>
+              <p (click)="openDialog()">Búsqueda avanzada</p>
+            </div>
+          </div>
+        </div>
+        <!-- Fila 2 (con 3 columnas) -->
+        <div class="row row-2">
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Tipo de documento</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                <mat-form-field>
+                  <mat-label></mat-label>
+                  <mat-select>
+                    <mat-option value="option1">Option 1</mat-option>
+                    <mat-option value="option2">Option2</mat-option>
+                    <mat-option value="option3">Option 3</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+          </div>
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Numero de documento</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                <mat-form-field class="value">
+                  <input matInput type="text" />
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Agente supervisado</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                <mat-form-field>
+                  <mat-label></mat-label>
+                  <mat-select>
+                    <mat-option value="option1">Option 1</mat-option>
+                    <mat-option value="option2">Option2</mat-option>
+                    <mat-option value="option3">Option 3</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Fila 3 (con 3 columnas) -->
+        <div class="row row-3">
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Estado de habilitacion</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                <mat-form-field>
+                  <mat-label></mat-label>
+                  <mat-select>
+                    <mat-option value="option1">Option 1</mat-option>
+                    <mat-option value="option2">Option2</mat-option>
+                    <mat-option value="option3">Option 3</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Fecha de solicitud</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                <mat-form-field>
+                  <mat-label>dd/mm/yyyy</mat-label>
+                  <input matInput>
+                  <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Fecha de habilitacion</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                <mat-form-field>
+                  <mat-label>dd/mm/yyyy</mat-label>
+                  <input matInput>
+                  <mat-datepicker-toggle matIconSuffix></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-3">
+          <div class="column">
+            <div class="container2">
+
+
+
+              <div class="row row-3">
+                <div class="column">
+                  <div class="container2">
+
+                    <!-- Fila 2 -->
+                    <div class="row11">
+                      <button mat-button class="action-button">
+                        <i class="material-icons">note_add</i> Generar reporte
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                <div class="column"></div>
+                <div class="column"></div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,146 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión EPP</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Solicitar EPP</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Solicitar EPP</strong></h5>
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <div class="form-container">
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Tipo de EPP</mat-label>
+            <mat-select [(ngModel)]="selectedTipoEPP">
+              <mat-option *ngFor="let epp of tipoEPP" [value]="epp.id">
+                {{ epp.descripcion }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Cantidad</mat-label>
+            <input matInput type="text" [(ngModel)]="cantidad" placeholder="Cantidad" />
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-label>Motivo de Solicitud</mat-label>
+            <mat-select [(ngModel)]="selectedMotivo">
+              <mat-option *ngFor="let motivo of motivos" [value]="motivo.id">
+                {{ motivo.descripcion }}
+              </mat-option>
+            </mat-select>
+
+          </mat-form-field>
+        </div>
+      </div>
+
+      <!-- Campo adicional para actividad -->
+      <div *ngIf="selectedMotivo === '002'" class="row">
+        <mat-form-field class="full-width">
+          <textarea matInput [(ngModel)]="actividadTexto" placeholder="Describe la actividad"></textarea>
+        </mat-form-field>
+      </div>
+
+      <!-- Botón para adjuntar evidencia -->
+      <div *ngIf="selectedMotivo === '003'" class="row">
+        <button (click)="adjuntarEvidencia()" mat-raised-button color="primary">
+          <mat-icon>attachment</mat-icon> Adjuntar Evidencia
+        </button>
+      </div>
+
+      <!-- Botones -->
+      <div class="row">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="agregarOEditarEPP()">
+          {{ isEditing ? 'Editar' : 'Agregar' }}
+        </button>
+        <button
+          mat-raised-button
+          color="warn"
+          (click)="limpiarFormulario()">
+          Limpiar
+        </button>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<br>
+
+<p class="parrafo-ListadoEpp">Listado de EPP a solicitar</p>
+<br>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> Tipo EPP </th>
+    <td mat-cell *matCellDef="let element" (click)="onRowClick(element)">
+      {{ element.position }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let element"> {{ element.name }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> Motivo </th>
+    <td mat-cell *matCellDef="let element"> {{ element.weight }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef> Actividad </th>
+    <td mat-cell *matCellDef="let element"> {{ element.symbol }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <th mat-header-cell *matHeaderCellDef> Evidencia </th>
+    <td mat-cell *matCellDef="let element">
+      <!-- Si el uuId existe, mostramos el uuId; si no, mostramos un mensaje o vacío -->
+      {{element.age ? element.age : 'No evidencia'}}
+    </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Acción </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-icon (click)="seleccionarEPPParaEditar(element)">edit</mat-icon>
+      <mat-icon (click)="eliminarEPP(element)">delete</mat-icon>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<br>
+<div class="button-container">
+
+
+  <button (click)="registrarSolicitud()"  mat-fab extended >
+    <span class="button-icon"><i style="color:white;" class="fa-solid fa-file-circle-plus"></i></span> <!-- Icono de guardar -->
+    Generar solicitud
+  </button>
+</div>

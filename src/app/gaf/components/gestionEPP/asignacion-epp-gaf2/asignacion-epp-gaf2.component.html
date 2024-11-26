@@ -1,0 +1,255 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión EPP</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Asignación de EPP</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Asignación de EPP</strong></h5>
+<div class="contenedor-textos-horizontales">
+  <p (click)="historialEpp()" >Historial de EPP Asignados</p>
+  <p (click)="matrizEpp()" >Matriz EPP por Puesto</p>
+  <p (click)="maestroAsignacionesEpp()" >Maestro de Asignaciones de EPP</p>
+</div>
+
+
+
+<mat-card appearance="outlined" class="card">
+  <mat-card-content>
+
+    <div class="cabecera-card">
+      <!-- Título del card -->
+      <div class="cabecera-card__left">
+        <p style="color:black;">Datos del trabajador</p>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Sección con 4 columnas -->
+      <div class="row">
+        <div class="column">Tipo de documento:</div>
+        <div class="column">Número de documento:</div>
+        <div class="column">Apellidos y nombres:</div>
+        <div class="column">Puesto de trabajo:</div>
+      </div>
+      <div class="row">
+        <div class="column"><strong>DNI</strong></div>
+        <div class="column"><strong>74200697</strong></div>
+        <div class="column"><strong>Padilla Castillo, Jeancarlos</strong></div>
+        <div class="column"><strong>Front-End</strong></div>
+      </div>
+
+      <!-- Botón debajo de las columnas -->
+
+    </div>
+  </mat-card-content>
+</mat-card>
+<br>
+<mat-card appearance="outlined" class="card">
+  <mat-card-content>
+   <p>Registro de Entrega</p>
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-header" (click)="toggleAccordion(0)">
+          <strong>Entrega:</strong>14/11/2024<strong>-Cantidad de articulo entregados:</strong>2<strong>-Personal</strong>:Gomez Ramirez Sara
+        </button>
+        <div class="accordion-content" [class.active]="activeIndex === 0">
+          <div class="container-acordion">
+            <span class="text">Cargo de recepción</span>
+            <button class="button">Exportar</button>
+          </div>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> Motivo de solicitud </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Tipo de EPP </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef> Cantidad entregada </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+
+
+            <!-- Header row -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color: #1A4DB3; color:white"></tr>
+
+            <!-- Data rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" (click)="toggleAccordion(1)">
+          <strong>Entrega:</strong>15/11/2024<strong>-Cantidad de articulo entregados:</strong>1<strong>-Personal</strong>:Calagua Cuba Joel
+
+        </button>
+        <div class="accordion-content" [class.active]="activeIndex === 1">
+          <div class="container-acordion">
+            <span class="text">Cargo de recepción</span>
+            <button class="button">Exportar</button>
+          </div>
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> Motivo de solicitud </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Tipo de EPP </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef> Cantidad entregada </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+
+
+            <!-- Header row -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color: #1A4DB3; color:white"></tr>
+
+            <!-- Data rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" (click)="toggleAccordion(2)">
+          <strong>Entrega:</strong>15/11/2024<strong>-Cantidad de articulo entregados:</strong>3<strong>-Personal</strong>:Rosas Escalante David
+
+        </button>
+        <div class="accordion-content" [class.active]="activeIndex === 2">
+          <div class="container-acordion">
+            <span class="text">Cargo de recepción</span>
+            <button class="button">Exportar</button>
+          </div>
+
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> Motivo de solicitud </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Tipo de EPP </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="cantidad">
+              <th mat-header-cell *matHeaderCellDef> Cantidad entregada </th>
+              <td mat-cell *matCellDef="let element">
+              <input>
+              </td>
+            </ng-container>
+
+
+
+            <!-- Header row -->
+            <tr mat-header-row *matHeaderRowDef="displayedColumns1" style="background-color: #1A4DB3; color:white"></tr>
+
+            <!-- Data rows -->
+            <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+
+
+  </mat-card-content>
+</mat-card>
+<p>Detalle de solicitud</p>
+<br>
+
+<table mat-table [dataSource]="datasource" class="mat-elevation-z8">
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> Motivo de solicitud </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Tipo de EPP </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="cantidad">
+    <th mat-header-cell *matHeaderCellDef> Cantidad solicitada </th>
+    <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="stock">
+    <th mat-header-cell *matHeaderCellDef> Stock </th>
+    <td mat-cell *matCellDef="let element"> {{element.stock}} </td>
+  </ng-container>
+  <!-- Position Column -->
+  <ng-container matColumnDef="entrega">
+    <th mat-header-cell *matHeaderCellDef> Cantidad a entregar </th>
+    <td mat-cell *matCellDef="let element" style="border-radius:5px;width: 15px;">
+        <input matInput type="text" />
+    </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="vida">
+    <th mat-header-cell *matHeaderCellDef> Vida util aproximada </th>
+    <td mat-cell *matCellDef="let element"> {{element.vida}} </td>
+  </ng-container>
+
+  <!-- Header row -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+  <!-- Data rows -->
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<div class="button-container">
+  <button routerLink="/asignacion-epp-gaf" mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-right-from-bracket"></i></span> <!-- Icono de búsqueda -->
+    Regresar
+  </button>
+  <button mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-file-circle-check"></i></span> <!-- Icono de guardar -->
+    Aprobar
+  </button>
+  <button mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-regular fa-file-excel"></i></span> <!-- Icono de cancelar -->
+    Rechazar
+  </button>
+</div>
+
