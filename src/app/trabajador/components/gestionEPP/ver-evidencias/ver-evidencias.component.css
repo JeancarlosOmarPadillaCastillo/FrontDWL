@@ -1,0 +1,417 @@
+/* Contenedor principal */
+.contenedor-principal {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: auto;
+  /* Ajusta el ancho según tus necesidades */
+}
+
+.fila p {
+  font-weight: bold;
+  color: black;
+}
+
+/* Título en la parte superior */
+/* Estilo del contenedor con el título y el botón */
+.contenedor-titulo {
+  display: flex;
+  justify-content: space-between;
+  /* Alinea los elementos a los extremos */
+  align-items: center;
+  /* Alinea verticalmente los elementos */
+  /* Espacio debajo del título */
+  background-color: #0039AA1A;
+  /* Fondo azul */
+  color: #1a4db3;
+  /* Texto en blanco */
+  padding: 5px 5px;
+  /* Relleno para que no esté pegado al borde */
+  width: auto;
+  /* Ocupa todo el ancho disponible */
+}
+
+/* Estilo para el párrafo */
+.contenedor-titulo p {
+  font-size: 20px;
+  margin-left: 26px;
+  margin-bottom: -5px;
+  /* Elimina el margen por defecto */
+  font-weight: bold;
+  /* Negrita */
+}
+
+/* Estilo del botón */
+.boton-avanzada {
+  padding: 8px 16px;
+  /* Relleno del botón */
+  background-color: white;
+  /* Fondo del botón */
+  color: #1a4db3;
+  border: 2px solid rgb(252, 249, 249) !important;
+  border-radius: 5px;
+  /* Texto en blanco */
+  font-size: 14px;
+  /* Sin bordes */
+  /* Bordes redondeados */
+  cursor: pointer;
+  /* Cambia el cursor a mano */
+}
+
+.boton-avanzada:hover {
+  background-color: #f1f8ff;
+  /* Cambia el color de fondo cuando el mouse está sobre el botón */
+}
+
+
+/* Contenedor de la cuadrícula 2x2 */
+.contenedor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Dos columnas de igual tamaño */
+  grid-template-rows: auto auto;
+  /* Dos filas automáticas */
+  gap: 10px;
+  /* Espacio entre las celdas */
+  margin-bottom: 15px;
+  /* Espacio debajo de la cuadrícula */
+}
+
+/* Estilo de cada celda */
+.celda {
+  padding: 10px;
+  border-radius: 4px;
+  text-align: start;
+}
+
+/* Contenedor de los botones */
+.contenedor-botones {
+  display: flex;
+  gap: 10px;
+  /* Espacio entre los botones */
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 30px 0
+}
+
+/* Botón "Salir" */
+.boton-salir {
+  padding: 10px 20px;
+  background-color: #EAECF0;
+  /* Color de fondo */
+  color: #0056b3;
+  /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Botón "Buscar" */
+.boton-buscar {
+  padding: 10px 20px;
+  background-color: #1A4DB3;
+  /* Color de fondo */
+  color: white;
+  /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-salir:hover {
+  background-color: #d6d8db;
+}
+
+.boton-buscar:hover {
+  background-color: #0056b3;
+}
+
+.mat-mdc-form-field-wrapper {
+  border: none;
+  /* Elimina el borde del contenedor */
+}
+
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-wrapper {
+  padding: 0;
+  /* Elimina el padding interno */
+}
+
+.mat-mdc-form-field-wrapper {
+  background-color: #f5f5f5;
+}
+
+.mat-mdc-input-element:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.mat-mdc-input-element {
+  padding: 15px 25px;
+  border: 2px solid rgb(235, 235, 235) !important;
+  border-radius: 8px;
+}
+.centered-bordered-div {
+  display: flex;
+  flex-direction: column; /* Alinea los elementos en columna */
+  align-items: center;    /* Centra horizontalmente */
+  justify-content: flex-start; /* Alinea los elementos al inicio (arriba) */
+  height: 200px;         /* Altura ajustable */
+  width: 80%;            /* Ancho ajustable */
+  margin: auto;          /* Centrado en la página */
+  border: 2px dashed #000; /* Borde con rayas */
+  text-align: center;
+  font-size: 16px;       /* Tamaño del texto */
+  box-sizing: border-box; /* Incluye el borde en el tamaño total del div */
+  padding: 10px;         /* Espacio interno del div */
+}
+
+.full-width-button {
+  width: 100%;           /* Ocupa todo el ancho del contenedor */
+  padding: 10px;         /* Espaciado interno del botón */
+  background-color: #1A4DB3; /* Fondo azul */
+  color: white;          /* Texto blanco */
+  border: none;          /* Sin bordes */
+  border-radius: 4px;    /* Bordes redondeados */
+  display: flex;         /* Flex para alinear contenido */
+  justify-content: space-between; /* Icono a la derecha */
+  align-items: center;   /* Centra verticalmente el contenido */
+  cursor: pointer;       /* Manito al pasar el mouse */
+  font-size: 14px;       /* Tamaño del texto */
+  box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+.full-width-button mat-icon {
+  margin-left: 10px;     /* Espaciado entre el texto y el icono */
+}
+
+.full-width-button:hover {
+  background-color: #0056b3; /* Fondo más oscuro al pasar el mouse */
+}
+
+/* Para estilizar la vista previa de la imagen */
+.file-preview {
+  max-width: 200px;
+  max-height: 200px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+/* Botón */
+.full-width-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  text-align: center;
+}
+.file-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.file-info {
+  flex-grow: 1;
+}
+
+.file-preview-container {
+  position: relative;
+}
+
+.file-preview {
+  max-width: 100px;
+  max-height: 100px;
+}
+
+.delete-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  border: none;
+  color: red;
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.delete-btn:hover {
+  color: darkred;
+}.archivo-container {
+   display: flex;
+   align-items: flex-start;
+   border: 1px solid #ddd;
+   margin-top: 10px;
+   padding: 10px;
+   border-radius: 8px;
+   position: relative;
+ }
+
+.archivo-header {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.cerrar-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: red;
+}
+
+.archivo-content {
+  display: flex;
+  align-items: center;
+}
+
+.archivo-preview-contenedor {
+  width: 120px;
+  height: 120px;
+  margin-right: 15px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.archivo-preview {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+}
+
+.archivo-preview-no-disponible {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.archivo-detalles p {
+  margin: 0;
+}
+.archivo-preview-contenedor {
+  width: 120px;
+  height: 120px;
+  margin-right: 15px;
+  background-color: #f4f4f4;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  position: relative;
+}
+
+.archivo-preview-icon {
+  font-size: 48px;
+  color: #e53935;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.archivo-preview {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 4px;
+}
+
+.archivo-preview-no-disponible {
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+}
+
+.archivo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.archivo-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.archivo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.archivo-ojito,
+.archivo-nombre,
+.archivo-icono {
+  flex: 1;
+  text-align: center;
+}
+
+.archivo-ojito mat-icon,
+.archivo-icono mat-icon {
+  font-size: 24px;
+}
+
+.archivo-nombre p {
+  font-weight: bold;
+  color: #333;
+}
+
+.boton-avanzada, .boton-salir, .boton-buscar {
+  padding: 10px;
+  margin: 5px;
+}
+.archivo-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.archivo-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.archivo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.archivo-icono,
+.archivo-nombre,
+.archivo-ojito {
+  flex: 1;
+  text-align: center;
+}
+
+.archivo-icono mat-icon,
+.archivo-ojito mat-icon {
+  font-size: 24px;
+}
+
+.archivo-nombre p {
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+
+.boton-avanzada, .boton-salir, .boton-buscar {
+  padding: 10px;
+  margin: 5px;
+}

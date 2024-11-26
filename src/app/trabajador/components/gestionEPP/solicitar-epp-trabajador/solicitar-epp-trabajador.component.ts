@@ -33,6 +33,8 @@ import {SolicitarService} from '../../../../services/solicitar.service';
 import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
 import {HistorialEppComponent} from '../../../../sst/components/gestion-epp/historial-epp/historial-epp.component';
 import {EnvioDatosAdjuntarService} from '../../../../services/envio-datos-adjuntar.service';
+import {VerEvidenciasComponent} from '../ver-evidencias/ver-evidencias.component';
+
 export interface PeriodicElement {
   position: string; // Tipo de EPP
   name: string; // Cantidad
@@ -69,7 +71,6 @@ export interface PeriodicElement {
     MatRowDef,
     MatSelect,
     MatTable,
-    RouterLink,
     MatHeaderCellDef,
     NgIf,
     FormsModule,
@@ -251,7 +252,7 @@ export class SolicitarEppTrabajadorComponent implements OnInit {
         nuevaActividad: element.symbol || "",  // Si hay nueva actividad, se agrega, sino se deja vacío
         cantidadSolicitada: parseInt(element.name, 10),  // Cantidad solicitada, asumiendo que 'name' es la cantidad
         evidencias: element.age ? [
-          { nombreArchivo: "archivo1.jpg", archivo: "archivo en base 64" },  // Asumimos archivos en base64 (simulados)
+          { nombreArchivo: "archivo1.g", archivo: "archivo en base 64" },  // Asumimos archivos en base64 (simulados)
           { nombreArchivo: "archivo2.jpg", archivo: "archivo en base 64" }
         ] : []  // Si no hay evidencia, se envía un array vacío
       }))
@@ -286,20 +287,43 @@ export class SolicitarEppTrabajadorComponent implements OnInit {
     const dialogRef = this.dialog.open(AdjuntarDesgasteEppComponent);
 
     dialogRef.componentInstance.evidenciaGuardada.subscribe((evidencia: any) => {
-      console.log("Evidencia recibida:", evidencia); // Verifica que recibes el archivo correctamente
-
-      // Aquí guardamos el uuId de la evidencia en el array de evidencias
-      this.listEvidencia.push(evidencia);  // Guarda el uuId de la evidencia
+      console.log("Evidencia recibida:", evidencia);  // Verifica que recibes el archivo correctamente
+      this.evidenciaAdjunta = true;
+      // Aquí guardamos el uuId y el fileName de la evidencia en el array de evidencias
+      this.listEvidencia.push(evidencia);  // Guarda el uuId y el filename
 
       // Si hay evidencia asociada, actualizar la columna "Evidencia" en la tabla
       const index = this.dataSource.data.findIndex((item: any) => item.position === this.selectedTipoEPP);
-     console.log('INDEX',index)
-      console.log('datasoure',this.dataSource.data)
-      // if (index !== -1) {
-      if (true){
-        this.dataSource.data[index].age = evidencia.uuId;  // Asignamos el uuId a la columna "Evidencia"
-        console.log('datos de la tabla para evidencia...',this.dataSource.data)
-        this.dataSource = new MatTableDataSource<PeriodicElement>(this.dataSource.data);  // Actualiza la vista de la tabla
+
+      if (index !== -1) {
+        // Aquí asignamos el uuId y el filename de la evidencia
+        this.dataSource.data[index].age = `${evidencia.fileName}`;
+        // Formato: uuId - filename
+        console.log('Datos de la tabla para evidencia...', this.dataSource.data);
+// Aquí actualizas correctamente los datos de la tabla
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.dataSource.data);
+      }
+    });
+  }
+
+
+
+  verEvidencia(element: PeriodicElement): void {
+    const evidenciaId = element.age;  // Aquí obtenemos el `uuId` de la evidencia
+    const evidenciaNombre = element.age;  // Si 'age' contiene el `fileName`, lo podemos usar como `fileName`
+
+    // Abriendo el modal y pasando el `uuId` y `fileName` como datos
+    const dialogRef = this.dialog.open(VerEvidenciasComponent, {
+      data: {
+        uuId: evidenciaId,
+        fileName: evidenciaNombre
+      }  // Pasamos tanto el `uuId` como el `fileName` al modal
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // Aquí puedes manejar lo que el modal devuelve si es necesario
+        console.log('Evidencia vista:', result);
       }
     });
   }

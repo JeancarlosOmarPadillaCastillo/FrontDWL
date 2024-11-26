@@ -98,7 +98,11 @@ export class AdjuntarDesgasteEppComponent implements OnInit{
         archivo.cargando = false;
         archivo.subido = true;
           // Al recibir la respuesta, emitimos el uuId
-          this.evidenciaGuardada.emit({ uuId: response.uuId });
+        this.evidenciaGuardada.emit({
+          uuId: response.uuId,
+          fileName: archivo.file.name
+        });
+
 
 
         const uuid = response.uuId || 'UUID no proporcionado'; // Ajusta según tu API

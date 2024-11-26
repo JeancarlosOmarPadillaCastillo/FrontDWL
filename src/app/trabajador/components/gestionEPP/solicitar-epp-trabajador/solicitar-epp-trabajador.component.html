@@ -118,8 +118,9 @@
   <ng-container matColumnDef="age">
     <th mat-header-cell *matHeaderCellDef> Evidencia </th>
     <td mat-cell *matCellDef="let element">
+      <button (click)="verEvidencia(element)">{{element.age ? element.age : 'No evidencia'}}</button>
       <!-- Si el uuId existe, mostramos el uuId; si no, mostramos un mensaje o vacío -->
-      {{element.age ? element.age : 'No evidencia'}}
+
     </td>
   </ng-container>
 
