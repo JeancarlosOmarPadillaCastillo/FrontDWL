@@ -6,7 +6,7 @@
 </div>
 <mat-dialog-content>
   <div class="archivo-lista">
-    <div *ngFor="let archivo of archivos" class="archivo-container">
+    <div *ngFor="let archivo of listOfArchivos" class="archivo-container">
       <div class="archivo-content">
         <div class="archivo-item">
           <div class="archivo-icono">
@@ -15,12 +15,11 @@
           <div class="archivo-nombre">
             <p>{{ archivo.nombre }}</p>
           </div>
-          <div
-            class="archivo-ojito">
-
-              <a [href]="'http://localhost:8094/nsrh-gestor-archivos-api/archivo/2/' + archivo.uuId" target="_blank">
-                <mat-icon>
-                  visibility</mat-icon></a>
+          <div class="archivo-ojito">
+            <a [href]="'http://localhost:8094/nsrh-gestor-archivos-api/archivo/2/' + archivo.uuId"
+               target="_blank">
+              <mat-icon>
+                visibility</mat-icon></a>
           </div>
         </div>
       </div>

@@ -19,6 +19,7 @@ import {RevisarSolicitudService} from '../../../../services/revisar-solicitud.se
 import {Empleado} from '../../../../sst/components/gestion-epp/solicitar-epp-sst/solicitar-epp-sst.component';
 import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
 import {MatPaginator} from '@angular/material/paginator';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 export interface DATA {
   name: string;
@@ -44,7 +45,7 @@ const year = today.getFullYear();
     ]),
   ],
   imports: [CommonModule, MatCardModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatTableModule, MatExpansionModule, MatDialogModule, MatDatepicker, MatDatepickerToggle, RouterLink,
-    MatDatepickerModule,
+    MatDatepickerModule,MatAutocompleteModule,
     MatNativeDateModule, ReactiveFormsModule, MatPaginator],
   providers: [
     provideNativeDateAdapter()// Asegúrate de esta línea
@@ -114,49 +115,68 @@ export class RevisarSolicitudEPPComponent implements OnInit, AfterViewInit {
         ? data.estadoProceso.toLowerCase().includes(estado)
         : true;
 
-      // Convertir las fechas del filtro
-      let matchesFecha = true;
-      if (fechaInicio && fechaFin) {
-        function convertToDate(dateString: string): Date {
-          const [fecha, hora] = dateString.split(' '); // Separar fecha y hora
-          const [day, month, year] = fecha.split('/').map(Number);
-          const [hours, minutes] = hora.split(':').map(Number);
-
-          const fullYear = year < 100 ? 2000 + year : year; // Manejar años como '24' => 2024
-          return new Date(fullYear, month - 1, day, hours, minutes);
-        }
-
-      }
+      const matchesFecha = this.isWithinDateRange(data.fechaSolicitud, fechaInicio, fechaFin);
 
       return matchesTipoDocumento && matchesNumeroDocumento && matchesEstado && matchesFecha;
     };
-
 
     // Suscribir a cambios en los filtros
     this.tipoDocumentoFilter.valueChanges.subscribe(() => this.applyFilter());
     this.numeroDocumentoFilter.valueChanges.subscribe(() => this.applyFilter());
     this.estadoFilter.valueChanges.subscribe(() => this.applyFilter());
-    this.fechaInicioFilter.valueChanges.subscribe(() => this.applyFilter());
-    this.fechaFinFilter.valueChanges.subscribe(() => this.applyFilter());
+    this.campaignOne.get('start')?.valueChanges.subscribe(() => this.applyFilter());
+    this.campaignOne.get('end')?.valueChanges.subscribe(() => this.applyFilter());
   }
 
   applyFilter() {
-      const tipoDocumentoValue = this.tipoDocumentoFilter.value || '';
-      const numeroDocumentoValue = this.numeroDocumentoFilter.value || '';
-      const estadoValue = this.estadoFilter.value || '';
+    const tipoDocumentoValue = this.tipoDocumentoFilter.value || '';
+    const numeroDocumentoValue = this.numeroDocumentoFilter.value || '';
+    const estadoValue = this.estadoFilter.value || '';
 
-      const fechaInicioValue = this.fechaInicioFilter.value
-        ? `${this.fechaInicioFilter.value.toLocaleDateString('es-ES')} 00:00`
-        : '';
-      const fechaFinValue = this.fechaFinFilter.value
-        ? `${this.fechaFinFilter.value.toLocaleDateString('es-ES')} 23:59`
-        : '';
+    // Obtén las fechas y verifica su existencia
+    const fechaInicioControl = this.campaignOne.get('start')?.value;
+    const fechaFinControl = this.campaignOne.get('end')?.value;
 
-      this.dataSource.filter = `${tipoDocumentoValue.trim().toLowerCase()}||${numeroDocumentoValue.trim().toLowerCase()}||${estadoValue.trim().toLowerCase()}||${fechaInicioValue}||${fechaFinValue}`;
+    const fechaInicioValue = fechaInicioControl
+      ? `${this.formatDate(fechaInicioControl)} 00:00`
+      : '';
+
+    const fechaFinValue = fechaFinControl
+      ? `${this.formatDate(fechaFinControl)} 23:59`
+      : '';
+
+    this.dataSource.filter = `${tipoDocumentoValue.trim().toLowerCase()}||${numeroDocumentoValue.trim().toLowerCase()}||${estadoValue.trim().toLowerCase()}||${fechaInicioValue}||${fechaFinValue}`;
+  }
+
+
+// Función para validar si la fecha está dentro del rango seleccionado
+  private isWithinDateRange(fechaSolicitud: string, fechaInicio: string, fechaFin: string): boolean {
+    if (!fechaInicio && !fechaFin) return true;
+
+    const solicitudDate = this.convertirFecha(fechaSolicitud);
+    const inicioDate = fechaInicio ? this.convertirFecha(fechaInicio) : null;
+    const finDate = fechaFin ? this.convertirFecha(fechaFin) : null;
+
+    if (inicioDate && finDate) {
+      return solicitudDate >= inicioDate && solicitudDate <= finDate;
+    } else if (inicioDate) {
+      return solicitudDate >= inicioDate;
+    } else if (finDate) {
+      return solicitudDate <= finDate;
     }
+    return true;
+  }
+
+// Convertir una fecha de tipo Date al formato DD/MM/YY
+  private formatDate(date: Date): string {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = String(date.getFullYear()).slice(-2);
+    return `${day}/${month}/${year}`;
+  }
 
 
-    cargarDatos(): void {
+  cargarDatos(): void {
     this.revisarSolicitudService.listarSolicutudJefe().subscribe({
       next: (data: Empleado[]) => {
         // Ordenar los datos por fechaSolicitud (más recientes primero)
@@ -184,6 +204,17 @@ export class RevisarSolicitudEPPComponent implements OnInit, AfterViewInit {
     return new Date(fullYear, month - 1, day, hours, minutes);
   }
 
+  limpiarFiltros() {
+    // Restablece los valores de los filtros
+    this.tipoDocumentoFilter.setValue('');
+    this.numeroDocumentoFilter.setValue('');
+    this.estadoFilter.setValue('');
+    this.campaignOne.get('start')?.setValue(null);
+    this.campaignOne.get('end')?.setValue(null);
+
+    // Aplica el filtro vacío para refrescar la tabla
+    this.applyFilter();
+  }
 
 
 

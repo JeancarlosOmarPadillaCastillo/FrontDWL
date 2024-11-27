@@ -92,10 +92,15 @@
         <div class="container-grid-title">
           <p></p>
         </div>
-        <div class="field-no-control">
-          <button mat-fab extended class="btn-blue">
-            <mat-icon>search</mat-icon> Buscar
-          </button>
+        <div class="row">
+          <div class="col">
+            <div class="animacion-acciones">
+              <button mat-fab extended color="primary" (click)="applyFilter()">
+                <mat-icon>search</mat-icon> Buscar</button>
+              <button style="background-color:#EAECF0; color:blue;" mat-fab extended color="primary" (click)="limpiarFiltros()">
+                Limpiar</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>

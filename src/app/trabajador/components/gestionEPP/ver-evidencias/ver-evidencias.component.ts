@@ -1,22 +1,19 @@
-import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent} from '@angular/material/dialog';
-import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
-import {MatIcon} from '@angular/material/icon';
-import {MatProgressSpinner} from '@angular/material/progress-spinner';
-import {HttpClient} from '@angular/common/http';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogActions, MatDialogClose, MatDialogContent } from '@angular/material/dialog';
+import { DecimalPipe, NgForOf, NgIf } from '@angular/common';
+import { MatIcon } from '@angular/material/icon';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-ver-evidencias',
   standalone: true,
   imports: [
-    DecimalPipe,
     MatDialogActions,
     MatDialogClose,
     MatDialogContent,
     MatIcon,
-    MatProgressSpinner,
-    NgForOf,
-    NgIf
+    NgForOf
   ],
   templateUrl: './ver-evidencias.component.html',
   styleUrl: './ver-evidencias.component.css'
@@ -24,10 +21,7 @@ import {HttpClient} from '@angular/common/http';
 export class VerEvidenciasComponent implements OnInit {
   evidenciaId: string;
   evidenciafileName: string;
-  archivos: { nombre: string; tipo: string; uuId: string }[] = [
-    { nombre: 'Documento 1', tipo: 'pdf', uuId: '12345-abc' },
-    { nombre: 'Documento 2', tipo: 'image', uuId: '67890-def' },
-  ];
+  listOfArchivos: { nombre: string; tipo: string; uuId: string }[] = []
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -38,7 +32,8 @@ export class VerEvidenciasComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('uuId recibido en el modal:', this.evidenciaId, this.evidenciafileName);
+    this.listOfArchivos.push({ nombre: this.evidenciafileName, tipo: 'image', uuId: this.evidenciaId});
+    console.log("esto es de listofarchivos: ", this.listOfArchivos)
   }
 
   visualizarArchivo(uuId: string) {

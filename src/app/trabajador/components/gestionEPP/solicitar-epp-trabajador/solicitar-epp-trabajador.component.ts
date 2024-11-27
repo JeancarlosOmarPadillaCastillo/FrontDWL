@@ -1,6 +1,6 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {MatButton, MatButtonModule, MatFabButton} from "@angular/material/button";
-import {MatCard, MatCardContent, MatCardModule} from "@angular/material/card";
+import { Component, inject, OnInit } from '@angular/core';
+import { MatButton, MatButtonModule, MatFabButton } from "@angular/material/button";
+import { MatCard, MatCardContent, MatCardModule } from "@angular/material/card";
 import {
   MatCell,
   MatCellDef,
@@ -10,30 +10,30 @@ import {
   MatHeaderRowDef,
   MatRow, MatRowDef, MatTable, MatTableDataSource, MatTableModule
 } from "@angular/material/table";
-import {MatFormField, MatFormFieldModule, MatLabel} from "@angular/material/form-field";
-import {MatIcon, MatIconModule} from "@angular/material/icon";
-import {MatInput, MatInputModule} from "@angular/material/input";
-import {MatOption} from "@angular/material/core";
-import {MatSelect, MatSelectModule} from "@angular/material/select";
-import {RouterLink} from "@angular/router";
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MatFormField, MatFormFieldModule, MatLabel } from "@angular/material/form-field";
+import { MatIcon, MatIconModule } from "@angular/material/icon";
+import { MatInput, MatInputModule } from "@angular/material/input";
+import { MatOption } from "@angular/material/core";
+import { MatSelect, MatSelectModule } from "@angular/material/select";
+import { RouterLink } from "@angular/router";
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import {
   BusquedaAvanzadaComponent
 } from '../../../../jefe-directo/components/busqueda-avanzada/busqueda-avanzada.component';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-import {CommonModule, NgForOf, NgIf} from '@angular/common';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatDatepicker, MatDatepickerToggle} from '@angular/material/datepicker';
-import {FormsModule} from '@angular/forms';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CommonModule, NgForOf, NgIf } from '@angular/common';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDatepicker, MatDatepickerToggle } from '@angular/material/datepicker';
+import { FormsModule } from '@angular/forms';
 import {
   GenerarSolicitudTrabajadorComponent
 } from '../dialog-generarSolicitudTrabajador/generar-solicitud-trabajador.component';
-import {AdjuntarDesgasteEppComponent} from '../adjuntar-desgaste-epp/adjuntar-desgaste-epp.component';
-import {SolicitarService} from '../../../../services/solicitar.service';
-import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
-import {HistorialEppComponent} from '../../../../sst/components/gestion-epp/historial-epp/historial-epp.component';
-import {EnvioDatosAdjuntarService} from '../../../../services/envio-datos-adjuntar.service';
-import {VerEvidenciasComponent} from '../ver-evidencias/ver-evidencias.component';
+import { AdjuntarDesgasteEppComponent } from '../adjuntar-desgaste-epp/adjuntar-desgaste-epp.component';
+import { SolicitarService } from '../../../../services/solicitar.service';
+import { EnvioDeDatosService } from '../../../../services/envio-de-datos.service';
+import { HistorialEppComponent } from '../../../../sst/components/gestion-epp/historial-epp/historial-epp.component';
+import { EnvioDatosAdjuntarService } from '../../../../services/envio-datos-adjuntar.service';
+import { VerEvidenciasComponent } from '../ver-evidencias/ver-evidencias.component';
 
 export interface PeriodicElement {
   position: string; // Tipo de EPP
@@ -45,7 +45,7 @@ export interface PeriodicElement {
 
 @Component({
   selector: 'app-solicitar-epp-trabajador',
-  standalone: true,animations: [
+  standalone: true, animations: [
     trigger('detailExpand', [
       state('collapsed,void', style({ height: '0px', minHeight: '0' })),
       state('expanded', style({ height: '*' })),
@@ -99,16 +99,17 @@ export class SolicitarEppTrabajadorComponent implements OnInit {
   isEditing: boolean = false;
   editingElementIndex: number | null = null;
   datosRecibidos: any;
-  public listEvidencia:Array<any>=[];
-  constructor(private solicitarService: SolicitarService, private servicioFavorito: EnvioDatosAdjuntarService,public dialogs: MatDialog) {
+  public listEvidencia: Array<any> = [];
+  obtainFileData: any;
+  constructor(private solicitarService: SolicitarService, private servicioFavorito: EnvioDatosAdjuntarService, public dialogs: MatDialog) {
   }
 
   ngOnInit(): void {
     // Al inicializar el componente, cargamos los datos de la solicitud
     this.loadMotivos();
     this.loadTipoEPP();
-    this.servicioFavorito.disparadordeFavoritos.subscribe(data=>{
-      console.log('recibiendo data...',data)
+    this.servicioFavorito.disparadordeFavoritos.subscribe(data => {
+      console.log('recibiendo data...', data)
       this.listEvidencia.push(data)
     })
     // Registrar la solicitud automáticamente al inicializar
@@ -252,8 +253,7 @@ export class SolicitarEppTrabajadorComponent implements OnInit {
         nuevaActividad: element.symbol || "",  // Si hay nueva actividad, se agrega, sino se deja vacío
         cantidadSolicitada: parseInt(element.name, 10),  // Cantidad solicitada, asumiendo que 'name' es la cantidad
         evidencias: element.age ? [
-          { nombreArchivo: "archivo1.g", archivo: "archivo en base 64" },  // Asumimos archivos en base64 (simulados)
-          { nombreArchivo: "archivo2.jpg", archivo: "archivo en base 64" }
+          { nombreArchivo: this.obtainFileData.fileName, archivo: this.obtainFileData.uuId },  // Asumimos archivos en base64 (simulados)
         ] : []  // Si no hay evidencia, se envía un array vacío
       }))
     };
@@ -288,6 +288,7 @@ export class SolicitarEppTrabajadorComponent implements OnInit {
 
     dialogRef.componentInstance.evidenciaGuardada.subscribe((evidencia: any) => {
       console.log("Evidencia recibida:", evidencia);  // Verifica que recibes el archivo correctamente
+      this.obtainFileData = evidencia
       this.evidenciaAdjunta = true;
       // Aquí guardamos el uuId y el fileName de la evidencia en el array de evidencias
       this.listEvidencia.push(evidencia);  // Guarda el uuId y el filename
@@ -300,17 +301,15 @@ export class SolicitarEppTrabajadorComponent implements OnInit {
         this.dataSource.data[index].age = `${evidencia.fileName}`;
         // Formato: uuId - filename
         console.log('Datos de la tabla para evidencia...', this.dataSource.data);
-// Aquí actualizas correctamente los datos de la tabla
+        // Aquí actualizas correctamente los datos de la tabla
         this.dataSource = new MatTableDataSource<PeriodicElement>(this.dataSource.data);
       }
     });
   }
 
-
-
   verEvidencia(element: PeriodicElement): void {
     const evidenciaId = element.age;  // Aquí obtenemos el `uuId` de la evidencia
-    const evidenciaNombre = element.age;  // Si 'age' contiene el `fileName`, lo podemos usar como `fileName`
+    const evidenciaNombre = this.obtainFileData.fileName;  // Si 'age' contiene el `fileName`, lo podemos usar como `fileName`
 
     // Abriendo el modal y pasando el `uuId` y `fileName` como datos
     const dialogRef = this.dialog.open(VerEvidenciasComponent, {
