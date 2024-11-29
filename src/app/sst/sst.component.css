@@ -1,0 +1,30 @@
+
+.card {
+  background: #ffffff;
+}
+
+.cabecera-card {
+  display: flex;
+  justify-content: space-between;
+  /* Alinea los elementos a los extremos */
+  align-items: center;
+  /* Centra los elementos verticalmente */
+  width: 100%;
+  /* Ocupa todo el ancho disponible */
+  color: #005cbf;
+}
+
+.cabecera-card__left {
+  /* Alineado automáticamente a la izquierda */
+}
+
+.cabecera-card__right {
+  display: flex;
+  align-items: center;
+  /* Alinea el ícono y el texto en el centro verticalmente */
+}
+
+.cabecera-card__right i {
+  margin-right: 8px;
+  /* Espacio entre el ícono y el texto */
+}

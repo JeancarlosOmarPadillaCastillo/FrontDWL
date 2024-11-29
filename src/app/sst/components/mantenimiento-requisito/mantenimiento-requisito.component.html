@@ -1,0 +1,124 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestion De Ingresos a Agentes Supervisados</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Mantenimiento de requisitos</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Mantenimiento de requisitos</strong></h5>
+<div class="centainer-principal">
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <div class="container">
+
+        <!-- Fila 2 (con 3 columnas) -->
+        <div class="row row-2">
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Tipo de requisito</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                  <input matInput type="text" />
+              </div>
+            </div>
+
+          </div>
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11">Requisito</div>
+              <!-- Fila 2 -->
+              <div class="row11">
+                  <input matInput type="text" />
+              </div>
+            </div>
+          </div>
+
+          <div class="column">
+            <div class="container2">
+              <!-- Fila 1 -->
+              <div class="row11"></div>
+              <!-- Fila 2 -->
+              <div class="row11">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row row-3">
+          <div class="column">
+            <div class="container2">
+              <div class="botones-container">
+                <button mat-fab extended class="boton-buscar">
+                  <i class="material-icons">search</i> Buscar
+                </button>
+                <button mat-fab extended (click)="openDialog1()" class="boton-limpiar">
+                  <i class="material-icons">add</i>Nuevo agente</button>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <br>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef> Tipo de requisito </th>
+      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Requisito </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="weight">
+      <th mat-header-cell *matHeaderCellDef> Fecha de actualización </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    </ng-container>
+
+    <!-- New Country Column -->
+    <ng-container matColumnDef="accion">
+      <th mat-header-cell *matHeaderCellDef> Acción </th>
+      <th mat-cell *matCellDef="let item">
+          <div class="animacion-acciones">
+
+            <p class="parrafo" (click)="openDialog1()"><mat-icon>edit</mat-icon></p>
+            <p class="parrafo" (click)="openDialogEliminar()" ><mat-icon>delete</mat-icon></p>
+          </div>
+      </th>
+    </ng-container>
+
+    <!-- Header row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+    <!-- Data rows -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</div>

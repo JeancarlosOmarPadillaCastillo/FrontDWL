@@ -1,0 +1,168 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión EPP</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Revisar solicitudes de EPP</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Revisar solicitudes de EPP</strong></h5>
+<div class="contenedor-textos-horizontales">
+  <p (click)="  historialEpp()" >Historial de EPP Asignados</p>
+  <p (click)="matrizEpp( datosRecibidos?.puesto )" >Matriz EPP por Puesto</p>
+  <p (click)="maestroAsignacionesEpp()" >Maestro de Asignaciones de EPP</p>
+</div>
+
+
+
+<mat-card appearance="outlined" class="card">
+  <mat-card-content>
+
+    <div class="cabecera-card">
+      <!-- Título del card -->
+      <div class="cabecera-card__left">
+        <p style="color:black;">Datos del trabajador</p>
+      </div>
+    </div>
+    <div class="container">
+      <!-- Sección con 4 columnas -->
+      <div class="row">
+        <div class="column">Tipo de documento:</div>
+        <div class="column">Número de documento:</div>
+        <div class="column">Apellidos y nombres:</div>
+        <div class="column">Puesto de trabajo:</div>
+      </div>
+      <div class="row">
+        <div class="column"><strong>{{ datosRecibidos?.tipoDocumento}}</strong></div>
+        <div class="column"><strong>{{ datosRecibidos?.documento }}</strong></div>
+        <div class="column"><strong>{{ datosRecibidos?.apellidoPaterno }} {{ datosRecibidos?.apellidoMaterno }}, {{ datosRecibidos?.nombre }}</strong></div>
+        <div class="column"><strong>{{ datosRecibidos?.puesto }}</strong></div>
+      </div>
+
+      <!-- Botón debajo de las columnas -->
+
+    </div>
+  </mat-card-content>
+</mat-card>
+<br>
+<p style="margin:0;">Detalle de solicitud</p>
+<br>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef>
+      <mat-checkbox (change)="toggleAll($event)" [checked]="isAllSelected()" [indeterminate]="isSomeSelected() && !isAllSelected()"></mat-checkbox>
+    </th>
+    <td mat-cell *matCellDef="let element">
+      <mat-checkbox
+        [checked]="element.estadoProceso === 'Aprobado'"
+        [disabled]="element.estadoProceso !== 'Pendiente'"
+        (change)="toggleSelection(element)">
+      </mat-checkbox>
+    </td>
+
+
+  </ng-container>
+
+
+  <!-- Tipo EPP Column -->
+  <ng-container matColumnDef="tipoEppDescripcion">
+    <th mat-header-cell *matHeaderCellDef> Tipo EPP </th>
+    <td mat-cell *matCellDef="let element"> {{ element.tipoEppDescripcion }} </td>
+  </ng-container>
+
+  <!-- Cantidad Aprobada Column -->
+  <ng-container matColumnDef="cantidadAprobada">
+    <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+    <td mat-cell *matCellDef="let element"> {{ element.cantidadSolicitada }} </td>
+  </ng-container>
+
+  <!-- Motivo Descripción Column -->
+  <ng-container matColumnDef="motivoDescripcion">
+    <th mat-header-cell *matHeaderCellDef> Motivo de Solicitud </th>
+    <td mat-cell *matCellDef="let element"> {{ element.motivoDescripcion }} </td>
+  </ng-container>
+
+  <!-- Nueva Actividad Column -->
+  <ng-container matColumnDef="nuevaActividad">
+    <th mat-header-cell *matHeaderCellDef> Nueva Actividad </th>
+    <td mat-cell *matCellDef="let element"> {{ element.nuevaActividad || '--' }} </td>
+  </ng-container>
+
+  <!-- Stock Column -->
+  <ng-container matColumnDef="stock">
+    <th mat-header-cell *matHeaderCellDef> Stock </th>
+    <td mat-cell *matCellDef="let element"> {{ element.stock || '--' }} </td>
+  </ng-container>
+
+  <!-- Estado Solicitud Column -->
+  <ng-container matColumnDef="estadoSolicitud">
+    <th mat-header-cell *matHeaderCellDef> Estado </th>
+    <td mat-cell *matCellDef="let element"> {{ element.estadoProceso }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef aria-label="row action">&nbsp;</th>
+    <td mat-cell *matCellDef="let element">
+      <div class="animacion-acciones">
+        <button mat-button (click)="expandedElement = expandedElement === element ? null : element">
+          <mat-icon >
+            {{expandedElement === element ? 'expand_less' : 'expand_more'}}
+          </mat-icon>
+        </button>
+
+
+      </div>
+    </td>
+  </ng-container>
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="definitionCellExpanded.length">
+      <div class="table-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+        <table mat-table [dataSource]="[{}]" class="table-detail">
+          <ng-container matColumnDef="names">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Compatibilidad segun Matriz EPP  </th>
+            <td mat-cell *matCellDef="let data"> Compatible </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="definitionCellExpanded"></tr>
+          <tr mat-row *matRowDef="let row; columns: definitionCellExpanded;"></tr>
+        </table>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="definitionCell"></tr>
+  <tr mat-row *matRowDef="let element; columns: definitionCell;" class="table-element-row"
+      [class.table-expanded-row]="expandedElement === element"></tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="table-detail-row"></tr>
+</table>
+<mat-paginator [length]="100"
+                       [pageSize]="10"
+                       [pageSizeOptions]="[5, 10, 25, 100]"
+                       aria-label="Seleccionar por pagina">
+</mat-paginator>
+
+<div class="button-container">
+  <button routerLink="/revisar-solicitud-epp-sst" mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-right-from-bracket"></i></span> <!-- Icono de búsqueda -->
+    Regresar
+  </button>
+  <button (click)="aprobar()"  mat-fab extended>
+    <span class="button-icon"><i  style="color:white" class="fa-solid fa-file-circle-check"></i></span> <!-- Icono de guardar -->
+    Aprobar
+  </button>
+  <button mat-fab extended (click)="openDialogRechazo()">
+    <span class="button-icon"><i  style="color:white" class="fa-regular fa-file-excel"></i></span> <!-- Icono de cancelar -->
+    Rechazar
+  </button>
+</div>

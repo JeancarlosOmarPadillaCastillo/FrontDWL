@@ -1,0 +1,165 @@
+/* Contenedor principal */
+.contenedor-principal {
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: auto;
+  /* Ajusta el ancho según tus necesidades */
+}
+
+.fila p {
+  font-weight: bold;
+  color: black;
+}
+
+/* Título en la parte superior */
+/* Estilo del contenedor con el título y el botón */
+.contenedor-titulo {
+  display: flex;
+  justify-content: space-between;
+  /* Alinea los elementos a los extremos */
+  align-items: center;
+  /* Alinea verticalmente los elementos */
+  /* Espacio debajo del título */
+  background-color: #0039AA1A;
+  /* Fondo azul */
+  color: #1a4db3;
+  /* Texto en blanco */
+  padding: 5px 5px;
+  /* Relleno para que no esté pegado al borde */
+  width: auto;
+  /* Ocupa todo el ancho disponible */
+}
+
+/* Estilo para el párrafo */
+.contenedor-titulo p {
+  font-size: 20px;
+  margin-left: 26px;
+  margin-bottom: -5px;
+  /* Elimina el margen por defecto */
+  font-weight: bold;
+  /* Negrita */
+}
+
+/* Estilo del botón */
+.boton-avanzada {
+  padding: 8px 16px;
+  /* Relleno del botón */
+  background-color: white;
+  /* Fondo del botón */
+  color: #1a4db3;
+  border: 2px solid rgb(252, 249, 249) !important;
+  border-radius: 5px;
+  /* Texto en blanco */
+  font-size: 14px;
+  /* Sin bordes */
+  /* Bordes redondeados */
+  cursor: pointer;
+  /* Cambia el cursor a mano */
+}
+
+.boton-avanzada:hover {
+  background-color: #f1f8ff;
+  /* Cambia el color de fondo cuando el mouse está sobre el botón */
+}
+
+
+/* Contenedor de la cuadrícula 2x2 */
+.contenedor-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Dos columnas de igual tamaño */
+  grid-template-rows: auto auto;
+  /* Dos filas automáticas */
+  gap: 10px;
+  /* Espacio entre las celdas */
+  margin-bottom: 15px;
+  /* Espacio debajo de la cuadrícula */
+}
+
+/* Estilo de cada celda */
+.celda {
+  padding: 10px;
+  border-radius: 4px;
+  text-align: start;
+}
+
+/* Contenedor de los botones */
+.contenedor-botones {
+  display: flex;
+  gap: 10px;
+  /* Espacio entre los botones */
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 30px 0
+}
+
+/* Botón "Salir" */
+.boton-salir {
+  padding: 10px 20px;
+  background-color: #EAECF0;
+  /* Color de fondo */
+  color: #0056b3;
+  /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Botón "Buscar" */
+.boton-buscar {
+  padding: 10px 20px;
+  background-color: #1A4DB3;
+  /* Color de fondo */
+  color: white;
+  /* Color del texto */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.boton-salir:hover {
+  background-color: #d6d8db;
+}
+
+.boton-buscar:hover {
+  background-color: #0056b3;
+}
+
+.mat-mdc-form-field-wrapper {
+  border: none;
+  /* Elimina el borde del contenedor */
+}
+
+.mat-mdc-form-field-appearance-outline .mat-mdc-form-field-wrapper {
+  padding: 0;
+  /* Elimina el padding interno */
+}
+
+.mat-mdc-form-field-wrapper {
+  background-color: #f5f5f5;
+}
+
+.mat-mdc-input-element:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.mat-mdc-input-element {
+  padding: 15px 25px;
+  border: 2px solid rgb(235, 235, 235) !important;
+  border-radius: 8px;
+}
+.full-width {
+  width: 100%;
+}
+
+mat-form-field.full-width {
+  display: block;
+  width: 100%;
+}
+
+textarea {
+  width: 100%;
+  padding:5px;
+}

@@ -1,0 +1,333 @@
+h5 {
+  margin-top: -10px;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  gap: 5px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.column {
+  flex: 1 1 100%; /* El ancho por defecto es 100% en pantallas pequeñas */
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espacio entre los botones */
+  padding: 20px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.button-icon {
+  margin-right: 8px; /* Espacio entre el icono y el texto */
+  font-size: 18px;
+}
+.col {
+  margin-top: 10px;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.value {
+  width: 80%;
+  margin: 10px;
+}
+
+
+.field {
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.is-enabled {
+  color: green;
+}
+
+.is-disabled {
+  color: red;
+}
+
+.is-in-proccess {
+  color: blue;
+}
+
+.is-pending {
+  color: orange;
+}
+
+.mat-mdc-fab {
+  background-color: #005cbf;
+  font-size: 16px;
+  color: white;
+}
+
+.btn-print {
+  background-color: rgb(228, 228, 228);
+  font-size: 16px;
+  color: #005cbf;
+}
+
+.mat-mdc-header-row {
+  background-color: #005cbf;
+  color: white;
+  font-weight: bold;
+}
+
+.mat-mdc-header-cell {
+  padding: 10px;
+  text-align: center;
+}
+
+.mat-mdc-header-cell:hover {
+  background-color: #005cbf;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: rgb(250, 250, 250);
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background-color: white;
+}
+
+.mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+
+.fila {
+  display: flex;
+  /* Esto hace que los elementos dentro de este div se acomoden en una fila */
+  align-items: flex-start;
+  /* Alinea los elementos al principio del eje vertical */
+  margin-top: -1rem;
+  margin-bottom: 0.5rem;
+}
+
+.componente {
+  margin-right: 0px;
+  /* Espacio entre los componentes */
+  padding: 0px;
+  color: #1A4DB3;
+}
+
+.card {
+  background: #ffffff;
+}
+
+.cabecera-card {
+  display: flex;
+  justify-content: space-between;
+  /* Alinea los elementos a los extremos */
+  align-items: center;
+  /* Centra los elementos verticalmente */
+  width: 100%;
+  /* Ocupa todo el ancho disponible */
+  color: #005cbf;
+}
+
+.cabecera-card__left {
+  /* Alineado automáticamente a la izquierda */
+}
+
+.cabecera-card__right {
+  display: flex;
+  align-items: center;
+  /* Alinea el ícono y el texto en el centro verticalmente */
+}
+
+.cabecera-card__right i {
+  margin-right: 8px;
+  /* Espacio entre el ícono y el texto */
+}
+
+/* Contenedor principal */
+/* Contenedor de animación con centrado */
+.animacion-acciones {
+  display: flex;
+  /* Coloca los elementos en fila */
+  align-items: center;
+  /* Centra verticalmente */
+  justify-content: center;
+  /* Centra horizontalmente */
+  gap: 10px;
+  /* Espacio de separación entre los elementos */
+  padding: 10px;
+  background-color: transparent;
+  /* Fondo opcional */
+}
+
+/* Estilo del contenido si es un párrafo */
+.animacion-acciones .parrafo {
+  margin: 0;
+  /* Elimina el margen por defecto */
+  color: #005cbf;
+  /* Color del texto */
+}
+
+/* Estilo específico para el texto con requisitos */
+.req-style {
+  background-color: #005cbf;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 5px;
+  width: 30px;
+  text-align: center;
+  /* Centra el texto dentro del div */
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+  margin: 5%;
+;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-diagram {
+  min-width: 80px;
+  border: 2px solid black;
+  padding: 8px;
+  font-weight: lighter;
+  margin: 8px 0;
+  height: 104px;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
+
+.table-inner {
+  margin: 5%;
+}
+
+.table-inner .mat-mdc-header-row {
+  background-color: #d6d9dd;
+  color: black;
+  font-weight: bold;
+}
+
+
+.table-inner .mat-mdc-header-cell:hover {
+  background-color: #478bd4;
+}
+
+.table-inner .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+}
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Divide en 4 columnas iguales */
+  gap: 15px; /* Espacio entre columnas */
+}
+
+.row {
+  display: contents; /* Los elementos internos se adaptan a las columnas */
+}
+
+.column {
+  padding: 10px;
+  box-sizing: border-box; /* Incluye padding y borde en el ancho total */
+  font-size: 14px;
+  text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.column strong {
+  font-weight: bold; /* Negrita para los datos */
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.cabecera-card__left p {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+  color: #005cbf;
+}
+
+.value {
+  display: flex;
+  justify-content: center; /* Centra el botón */
+}
+
+button[mat-fab] {
+  font-size: 14px;
+  padding: 8px 16px;
+  display: flex;
+  align-items: center;
+}
+
+.mat-icon {
+  margin-right: 5px; /* Espacio entre el icono y el texto */
+}
+.contenedor-textos-horizontales {
+  display: flex; /* Acomoda los elementos en fila */
+  justify-content: flex-end; /* Alinea los textos a la izquierda */
+  gap: 20px; /* Espacio entre los párrafos */
+  padding: 10px; /* Espaciado interno */
+  border-radius: 8px; /* Bordes redondeados opcionales */
+}
+
+.contenedor-textos-horizontales p {
+  margin: 0; /* Elimina márgenes predeterminados */
+  font-size: 16px; /* Tamaño del texto */
+  color: blue; /* Color del texto */
+  font-weight: bold; /* Negrita para resaltar los textos */
+}

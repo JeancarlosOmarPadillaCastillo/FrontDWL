@@ -1,0 +1,245 @@
+.fila {
+  display: flex;
+  /* Esto hace que los elementos dentro de este div se acomoden en una fila */
+  align-items: flex-start;
+  /* Alinea los elementos al principio del eje vertical */
+  margin-top: -1rem;
+  margin-bottom: 0.5rem;
+}
+
+.mat-mdc-fab {
+  background-color: #005cbf;
+  font-size: 16px;
+  color: white;
+}
+
+.componente {
+  margin-right: 0px;
+  /* Espacio entre los componentes */
+  padding: 0px;
+  color: #1A4DB3;
+}
+
+h5 {
+  margin-top: -10px;
+}
+
+.centainer-principal {
+  width: 95%;
+  text-align: center;
+
+}
+
+/* Contenedor principal */
+.container {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+  /* 4 filas automáticas */
+  gap: 5px;
+  /* Espacio entre las filas */
+}
+
+/* Fila vacía (Fila 1 y Fila 4) */
+.row-1 {
+  /* Fondo gris para ver las filas */
+  height: 5px;
+  /* Altura de cada fila (ajustable) */
+  text-align: start;
+}
+
+/* Fila 2 y Fila 3 con 3 columnas */
+.row-2,
+.row-3 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  /* Tres columnas de igual tamaño */
+  gap: 5px;
+  /* Espacio entre las columnas */
+}
+
+.column {
+  padding: 20px;
+  text-align: center;
+}
+
+
+
+/* Contenedor con 2 filas */
+.container2 {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  /* Dos filas de igual altura */
+  gap: 5px;
+  /* Espacio entre las filas */
+  padding: 5px;
+  background-color: #f9f9f9;
+  /* Fondo del contenedor */
+}
+
+/* Estilo para cada fila */
+.row11 {
+  height: 25px;
+  /* Altura de cada fila (ajustable) */
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+}
+
+.example-additional-selection {
+  opacity: 0.75;
+  font-size: 0.75em;
+  line-height: 1;
+}
+
+/* Estilo del botón */
+.search-button {
+  display: inline-flex;
+  /* Para alinear el texto y el ícono horizontalmente */
+  align-items: center;
+  /* Centra el contenido verticalmente */
+  background-color: #1A4DB3;
+  /* Fondo azul */
+  color: white;
+  /* Texto blanco */
+  border: none;
+  /* Sin bordes */
+  padding: 10px 20px;
+  /* Espaciado interno del botón */
+  font-size: 16px;
+  /* Tamaño de la fuente */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  cursor: pointer;
+  /* Cambia el cursor al pasar el ratón */
+  transition: background-color 0.3s ease;
+  /* Transición suave al pasar el ratón */
+}
+
+.search-button i {
+  margin-left: 8px;
+  /* Espacio entre el texto y el ícono */
+  font-size: 20px;
+  /* Tamaño del ícono */
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+  /* Cambia el fondo a un azul más oscuro al hacer hover */
+}
+
+.button-container {
+  display: flex;
+  /* Usamos Flexbox para alinear los elementos */
+  justify-content: center;
+  /* Centra los botones horizontalmente */
+  align-items: center;
+  /* Centra los botones verticalmente */
+  height: 25px;
+  /* Altura del contenedor, ajusta como necesites */
+  background-color: #f0f0f0;
+  /* Fondo para ver mejor el contenedor */
+}
+
+.button {
+  padding: 0px 20px;
+  /* Espaciado dentro de los botones */
+  margin: 0 5px;
+  /* Espacio entre los botones */
+  font-size: 16px;
+  /* Tamaño de la fuente */
+  cursor: pointer;
+  /* Cursor tipo puntero al pasar sobre el botón */
+  border: none;
+  /* Sin bordes */
+  background-color: #4CAF50;
+  /* Fondo verde para los botones */
+  color: white;
+  /* Texto blanco */
+  border-radius: 5px;
+  /* Bordes redondeados */
+  transition: background-color 0.3s;
+  /* Transición suave para el cambio de color */
+}
+
+.button:hover {
+  background-color: #45a049;
+  /* Color al pasar el ratón por encima */
+}
+
+.mat-mdc-header-row {
+  background-color: #005cbf;
+  color: white;
+  font-weight: bold;
+}
+
+.mat-mdc-header-cell {
+  padding: 10px;
+  text-align: center;
+}
+
+.mat-mdc-header-cell:hover {
+  background-color: #005cbf;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background-color: rgb(250, 250, 250);
+}
+
+.mat-mdc-row:nth-child(odd) {
+  background-color: white;
+}
+
+.is-enabled {
+  color: green;
+}
+
+.is-disabled {
+  color: red;
+}
+
+.is-in-proccess {
+  color: blue;
+}
+
+.is-pending {
+  color: orange;
+}
+.animacion-acciones {
+  display: flex; /* Coloca los elementos en fila */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  gap: 10px; /* Espacio de separación entre los elementos */
+  padding: 10px;
+  background-color: transparent; /* Fondo opcional */
+}
+
+/* Estilo del contenido si es un párrafo */
+.animacion-acciones .parrafo {
+  margin: 0; /* Elimina el margen por defecto */
+  color: #005cbf; /* Color del texto */
+}
+
+.animacion-acciones {
+  display: flex; /* Coloca los elementos en fila */
+  align-items: center; /* Centra verticalmente */
+  justify-content: center; /* Centra horizontalmente */
+  gap: 10px; /* Espacio de separación entre los elementos */
+  padding: 10px;
+  background-color: transparent; /* Fondo opcional */
+}
+
+/* Estilo del contenido si es un párrafo */
+.animacion-acciones .parrafo {
+  margin: 0; /* Elimina el margen por defecto */
+  color: #005cbf; /* Color del texto */
+}
+
+/* Estilo específico para el texto con requisitos */
+.req-style {
+  background-color: #005cbf;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 5px;
+  width: 30px;
+  text-align: center; /* Centra el texto dentro del div */
+}

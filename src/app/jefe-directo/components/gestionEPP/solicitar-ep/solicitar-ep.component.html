@@ -1,0 +1,129 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestión EPP</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Solicitar EPP</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Solicitar EPP</strong></h5>
+<mat-card appareance="outlined" class="card">
+  <mat-card-content>
+    <div class="container">
+      <div class="cabecera-card">
+        <!-- Div con el texto "Buscar Solicitud" alineado a la izquierda -->
+        <div class="cabecera-card__left">
+          <p  style="color:black;">Búsqueda de Trabajadores</p>
+        </div>
+
+        <!-- Div con el ícono y el texto "Búsqueda avanzada" alineado a la derecha -->
+        <div (click)="openDialog()" class="cabecera-card__right">
+          <i class="fas fa-search"></i>
+          <p>Búsqueda avanzada</p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="label">Tipo de documento</div>
+          <mat-form-field class="value">
+            <mat-label>Tipo de documento</mat-label>
+            <mat-select [formControl]="tipoDocumentoFilter">
+              <mat-option value="">Todos</mat-option>
+              <mat-option value="D">DNI</mat-option>
+              <mat-option value="CNE">CNE</mat-option>
+              <mat-option value="Otros">Otros</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <div class="label">Número de documento</div>
+          <mat-form-field class="value">
+            <input matInput [formControl]="numeroDocumentoFilter" placeholder="Ingrese número de documento" />
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <div class="col">
+            <div class="label"></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <div class="animacion-acciones">
+            <button mat-fab extended color="primary">
+              <mat-icon>search</mat-icon> Buscar</button>
+            <button style="background-color:#EAECF0; color:blue;" mat-fab extended color="primary">
+              Limpiar</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<p>Listado de trabajadores</p>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <ng-container matColumnDef="tipoDocumento">
+    <th mat-header-cell *matHeaderCellDef>Tipo de documento</th>
+    <td mat-cell *matCellDef="let element">{{ element.tipoDocumento }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="documento">
+    <th mat-header-cell *matHeaderCellDef>Número de documento</th>
+    <td mat-cell *matCellDef="let element">{{ element.documento }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="apellidoPaterno">
+    <th mat-header-cell *matHeaderCellDef>Apellido paterno</th>
+    <td mat-cell *matCellDef="let element">{{ element.apellidoPaterno }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="apellidoMaterno">
+    <th mat-header-cell *matHeaderCellDef>Apellido materno</th>
+    <td mat-cell *matCellDef="let element">{{ element.apellidoMaterno }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="nombre">
+    <th mat-header-cell *matHeaderCellDef>Nombre</th>
+    <td mat-cell *matCellDef="let element">{{ element.nombre }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="puesto">
+    <th mat-header-cell *matHeaderCellDef>Puesto</th>
+    <td mat-cell *matCellDef="let element">{{ element.puesto }}</td>
+  </ng-container>
+
+  <!-- New Country Column -->
+  <ng-container matColumnDef="country">
+    <th mat-header-cell *matHeaderCellDef>Acción</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        (click)="agregarFavorito(element)"
+        mat-button
+        routerLink="/solicitar-epp2"
+      >
+        <i class="fa-solid fa-right-to-bracket"></i>
+      </button>
+    </td>
+  </ng-container>
+
+
+  <!-- Encabezado y filas -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+

@@ -1,0 +1,162 @@
+<div class="fila">
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="home"></mat-icon>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <p>Gestion EPP</p>
+  </div>
+  <div class="componente">
+    <mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="keyboard_arrow_right"></mat-icon>
+  </div>
+  <div class="componente">
+    <strong>
+      <p>Ver Historial de Decisiones</p>
+    </strong>
+  </div>
+</div>
+<h5><strong>Ver Historial de Decisiones</strong></h5>
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <p>Búsqueda de Historial</p>
+    <div class="form-container">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate placeholder="Start date" (dateChange)="onStartDateChange($event)">
+              <input matEndDate placeholder="End date" (dateChange)="onEndDateChange($event)">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+
+
+
+
+        </div>
+
+        <div class="col">
+
+        </div>
+
+        <div class="col">
+
+        </div>
+      </div>
+
+      <!-- Botones -->
+      <div class="row">
+        <div class="col">
+          <div class="animacion-acciones">
+            <button (click)="cargarDatosHistorial()" mat-fab extended color="primary">
+              <mat-icon>search</mat-icon> Buscar</button>
+            <button style="background-color:#EAECF0; color:blue;" mat-fab extended color="primary">
+              Limpiar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<br>
+
+<p class="parrafo-ListadoEpp">Historial de EPP</p>
+<br>
+
+<div class="exportar-container">
+  <button mat-raised-button color="primary" (click)="openExportModal()">
+    Exportar <mat-icon>save</mat-icon>
+  </button>
+</div>
+
+<!-- Modal para opciones de descarga -->
+<ng-template #exportModal>
+  <mat-dialog-content>
+    <h3>Seleccionar formato de exportación</h3>
+    <mat-checkbox [(ngModel)]="exportPdf">PDF</mat-checkbox>
+    <mat-checkbox [(ngModel)]="exportCsv">CSV</mat-checkbox>
+    <div class="modal-buttons">
+      <button mat-button >Descargar</button>
+      <button mat-button (click)="closeExportModal()">Cancelar</button>
+    </div>
+  </mat-dialog-content>
+</ng-template>
+
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" multiTemplateDataRows>
+
+    <!-- Tipo de Documento -->
+    <ng-container matColumnDef="docType">
+      <th mat-header-cell *matHeaderCellDef>Numero de solicitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.idSolicitud || 'No especificado' }}</td>
+    </ng-container>
+
+    <!-- Número de Documento -->
+    <ng-container matColumnDef="docNro">
+      <th mat-header-cell *matHeaderCellDef>Tipo de documento</th>
+      <td mat-cell *matCellDef="let element">{{ element.tipoDocumento || 'No especificado' }}</td>
+    </ng-container>
+
+    <!-- Apellido Paterno -->
+    <ng-container matColumnDef="lnamePat">
+      <th mat-header-cell *matHeaderCellDef>Numero de documento</th>
+      <td mat-cell *matCellDef="let element">{{ element.documento || 'No especificado' }}</td>
+    </ng-container>
+
+    <!-- Apellido Materno -->
+    <ng-container matColumnDef="lnameMat">
+      <th mat-header-cell *matHeaderCellDef> Fecha de solicitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.fechaSolicitud || 'No especificado' }}</td>
+    </ng-container>
+
+    <!-- Nombre -->
+    <ng-container matColumnDef="nombre">
+      <th mat-header-cell *matHeaderCellDef>Tipo EPP</th>
+      <td mat-cell *matCellDef="let element">{{ element.tipoEpp || 'No especificado' }}</td>
+    </ng-container>
+
+    <!-- Estado -->
+    <ng-container matColumnDef="estado">
+      <th mat-header-cell *matHeaderCellDef>Desicion tomada</th>
+      <td mat-cell *matCellDef="let element">{{ element.decision || 'No especificado' }}</td>
+    </ng-container>
+
+    <!-- Fecha -->
+    <ng-container matColumnDef="fecha">
+      <th mat-header-cell *matHeaderCellDef>Estado solicitud</th>
+      <td mat-cell *matCellDef="let element">{{ element.estadoProceso || 'No especificado' }}</td>
+    </ng-container>
+
+    <!-- Acción (Expandir) -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Acción</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="expandedElement = expandedElement === element ? null : element">
+          <mat-icon>{{ expandedElement === element ? 'expand_less' : 'expand_more' }}</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Fila principal -->
+    <tr mat-header-row *matHeaderRowDef="definitionCell"></tr>
+    <tr mat-row *matRowDef="let row; columns: definitionCell;" [class.expanded-row]="expandedElement === row"></tr>
+
+    <ng-container matColumnDef="names">
+      <td mat-cell *matCellDef="let row" [attr.colspan]="definitionCell.length">
+        <div class="expanded-content">
+          <p><strong>Motivo:</strong> {{ row.motivoDescripcion || 'No especificado' }}</p>
+        </div>
+      </td>
+    </ng-container>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25]" showFirstLastButtons
+                   [pageSize]="10" [hidePageSize]="false" [length]="dataSource.data.length">
+    </mat-paginator>
+  </table>
+</div>
+

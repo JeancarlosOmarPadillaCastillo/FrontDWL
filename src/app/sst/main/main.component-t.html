@@ -1,0 +1,27 @@
+<div class="body" [ngClass]="sizeClass()">
+  <header class="header">
+    <!-- Div inicial -->
+    <div class="left-div">
+      <h6>Perfil SST</h6>
+    </div>
+
+    <!-- Div final con dos columnas -->
+    <div class="right-div">
+      <div class="column">
+        <p>Perfil</p>
+      </div>
+      <div class="column">
+        <p>Logo</p>
+      </div>
+    </div>
+  </header>
+  <br />
+  <br />
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <footer>
+    <p>2024 Osinergmin. | Todos los derechos reservados.</p>
+  </footer>
+
+</div>

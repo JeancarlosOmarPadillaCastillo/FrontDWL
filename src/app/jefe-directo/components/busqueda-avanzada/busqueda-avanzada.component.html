@@ -1,0 +1,54 @@
+<div class="contenedor-titulo">
+  <p>Busqueda avanzada</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada"><strong>Cerrar</strong></button>
+  </mat-dialog-actions>
+</div>
+<mat-dialog-content>
+  <!-- Contenedor con 2 filas y 2 columnas -->
+  <div class="contenedor-grid">
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila">
+          <p>Apellido paterno</p>
+        </div>
+        <!-- Segunda fila -->
+        <div class="fila">
+          <input matInput type="text" placeholder="Ingresar apellido paterno"/>
+        </div>
+      </div>
+    </div>
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila">
+          <p>Apellido materno</p>
+        </div>
+        <!-- Segunda fila -->
+        <div class="fila">
+          <input matInput type="text" placeholder="Ingresar apellido materno" />
+        </div>
+      </div>
+    </div>
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila">
+          <p>Nombres</p>
+        </div>
+        <!-- Segunda fila -->
+        <div class="fila">
+          <input matInput type="text" placeholder="Ingresar nombres"/>
+        </div>
+      </div>
+    </div>
+    <div class="celda">
+    </div>
+  </div>
+</mat-dialog-content>
+<!-- Div inferior con los botones "Salir" y "Buscar" -->
+<div class="contenedor-botones">
+  <button mat-dialog-close class="boton-salir">Salir</button>
+  <button class="boton-buscar">Buscar</button>
+</div>

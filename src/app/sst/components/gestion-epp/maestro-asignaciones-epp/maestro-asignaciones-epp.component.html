@@ -1,0 +1,34 @@
+<div class="contenedor-titulo">
+  <p>Maestro de Asignaciones de EPP</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada"><strong>Cerrar</strong></button>
+  </mat-dialog-actions>
+</div>
+<mat-dialog-content>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Tipo de EPP Column -->
+    <ng-container matColumnDef="descripcion">
+      <th mat-header-cell *matHeaderCellDef> Tipo de EPP </th>
+      <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+    </ng-container>
+
+    <!-- Cantidad Column -->
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+      <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+    </ng-container>
+
+    <!-- Header row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+    <!-- Data rows -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</mat-dialog-content>
+<!-- Div inferior con los botones "Salir" y "Buscar" -->
+<div class="contenedor-botones">
+  <button mat-dialog-close class="boton-salir">Cancelar</button>
+</div>
+

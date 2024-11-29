@@ -1,0 +1,22 @@
+<div class="contenedor-titulo">
+  <p>Rechazo de EPP</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada"><strong>Cerrar</strong></button>
+  </mat-dialog-actions>
+</div>
+<mat-dialog-content>
+  <p>Motivo de Rechazo de EPP:</p>
+  <div class="row full-width">
+    <div class="full-width form-group">
+      <mat-form-field class="full-width">
+        <textarea [(ngModel)]="data.comentario" matInput placeholder="Escriba aquí..." rows="4"></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<!-- Div inferior con los botones "Salir" y "Buscar" -->
+<div class="contenedor-botones">
+  <button mat-dialog-close class="boton-salir">Cancelar</button>
+  <button [mat-dialog-close]="data" class="boton-buscar">Aceptar</button>
+</div>

@@ -1,0 +1,91 @@
+
+<div class="contenedor-titulo">
+  <p>Asociar requisito</p>
+  <mat-dialog-actions>
+    <button mat-dialog-close class="boton-avanzada" >Cerrar</button>
+  </mat-dialog-actions>
+</div>
+
+<mat-dialog-content>
+  <!-- Contenedor con 2 filas y 2 columnas -->
+  <div class="contenedor-grid">
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila"><p>Agente supervisado</p></div>
+
+        <!-- Segunda fila -->
+        <div class="fila">
+          <mat-form-field class="value">
+            <input matInput type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila"><p>Sector</p></div>
+
+        <!-- Segunda fila -->
+        <div class="fila">
+          <mat-form-field class="value">
+            <input matInput type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila"><p>Requisito</p></div>
+
+        <!-- Segunda fila -->
+        <div class="fila">
+          <mat-form-field class="value">
+            <input matInput type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila"><p>Documento de sustento</p></div>
+
+        <!-- Segunda fila -->
+        <div class="fila">
+          <mat-form-field class="value">
+            <input matInput type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="celda">
+      <div class="contenedor-dos-filas">
+        <!-- Primera fila -->
+        <div class="fila"><p>Fecha de inicio de vigencia</p></div>
+
+        <!-- Segunda fila -->
+        <div class="fila">
+          <mat-form-field class="value">
+            <input matInput type="text" />
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</mat-dialog-content>
+<!-- Div inferior con los botones "Salir" y "Buscar" -->
+<div class="contenedor-botones">
+
+  <button mat-dialog-close class="boton-buscar">Cerrar</button>
+  <button (click)="openDialogAsociar()" mat-dialog-close class="boton-buscar">Asociar</button>
+</div>
+
+
+
