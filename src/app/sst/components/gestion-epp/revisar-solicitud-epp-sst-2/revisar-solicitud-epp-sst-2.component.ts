@@ -34,6 +34,12 @@ import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
 import {forkJoin, map} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {DATA} from '../revisar-solicitud-epp-sst/revisar-solicitud-epp-sst.component';
+import {
+  ModalItemsConfirmacionComponent
+} from '../../../../jefeDirecto/components/modal-items-confirmacion/modal-items-confirmacion.component';
+import {
+  ModalItemsRechazarComponent
+} from '../../../../jefeDirecto/components/modal-items-rechazar/modal-items-rechazar.component';
 
 
 export interface DetalleSolicitud {
@@ -86,17 +92,19 @@ export interface DetalleSolicitud {
     RouterLink,
     MatCheckbox,
     MatButton,
+    NgIf,
   ],
   templateUrl: './revisar-solicitud-epp-sst-2.component.html',
   styleUrl: './revisar-solicitud-epp-sst-2.component.css'
 })
 export class RevisarSolicitudEppSst2Component implements OnInit {
   definitionCell = [
-
+    'position',
     'tipoEppDescripcion',
     'cantidadAprobada',
     'motivoDescripcion',
     'nuevaActividad',
+    'evidencia',
     'stock',
     'estadoSolicitud',
     'action'
@@ -219,30 +227,42 @@ export class RevisarSolicitudEppSst2Component implements OnInit {
         totalEpp: totalEpp,
         pendienteEpp: cantidadPendientes,
       };
-      console.log('Aprobación exitosa: total de EPP:',totalEpp+'Pendiente', cantidadPendientes);
-      this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
 
-        // Actualiza el estado de los elementos seleccionados a 'Aprobado' y desactiva los checkboxes
-        this.dataSource.data = this.dataSource.data.map(row => {
-          if (detalleSeleccionado.includes(row.idDetalle)) {
-            return {
-              ...row,
-              estadoProceso: 'Aprobado', // Cambia a Aprobado
-              disabled: true,            // Desactiva el checkbox
-            };
-          }
-          return row; // Devuelve las demás filas sin cambios
-        });
+      const dialogRef = this.dialog.open(ModalItemsConfirmacionComponent, {
+        width: '600px',
+        data: { message: '¿Está seguro de aprobar los elementos seleccionados?' }
+      });
 
-        // Mantiene los elementos seleccionados y deshabilitados
-        this.selectedRows.forEach(row => {
-          if (detalleSeleccionado.includes(row.idDetalle)) {
-            row.estadoProceso = 'Aprobado';
-            row.disabled = true;
-          }
-        });
-      }, error => {
-        console.error('Error al aprobar:', error);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {  // Si el usuario confirma la aprobación
+          console.log('Aprobación exitosa: total de EPP:', totalEpp + ' Pendiente', cantidadPendientes);
+          this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
+
+            // Actualiza el estado de los elementos seleccionados a 'Aprobado' y desactiva los checkboxes
+            this.dataSource.data = this.dataSource.data.map(row => {
+              if (detalleSeleccionado.includes(row.idDetalle)) {
+                return {
+                  ...row,
+                  estadoProceso: 'Aprobado', // Cambia a Aprobado
+                  disabled: true,            // Desactiva el checkbox
+                };
+              }
+              return row;
+            });
+
+            // Mantiene los elementos seleccionados y deshabilitados
+            this.selectedRows.forEach(row => {
+              if (detalleSeleccionado.includes(row.idDetalle)) {
+                row.estadoProceso = 'Aprobado';
+                row.disabled = true;
+              }
+            });
+          }, error => {
+            console.error('Error al aprobar:', error);
+          });
+        } else {
+          console.log('Aprobación cancelada');
+        }
       });
     } else {
       console.warn('No hay elementos pendientes seleccionados para aprobar.');
@@ -253,6 +273,7 @@ export class RevisarSolicitudEppSst2Component implements OnInit {
   rechazar(detalleSeleccionado: number[], comentario: string): void {
     const cantidadPendientes = this.dataSource.data.filter((row: DetalleSolicitud) => row.estadoProceso === 'Pendiente').length;
     const totalEpp = this.dataSource.data.length;
+
     const payload = {
       idSolicitud: this.datosRecibidos?.idSolicitud,
       idEmpleado: this.datosRecibidos?.idEmpleado,
@@ -264,33 +285,46 @@ export class RevisarSolicitudEppSst2Component implements OnInit {
       totalEpp: totalEpp,
       pendienteEpp: cantidadPendientes,
     };
-    console.log('Aprobación exitosa: total de EPP:',totalEpp+'Pendiente', cantidadPendientes);
-    this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
 
-      // Actualiza el estado de los elementos seleccionados a 'Rechazado' y desactiva los checkboxes
-      this.dataSource.data = this.dataSource.data.map(row => {
-        if (detalleSeleccionado.includes(row.idDetalle)) {
-          return {
-            ...row,
-            estadoProceso: 'Rechazado', // Cambia a Rechazado
-            disabled: true,             // Desactiva el checkbox
-            comentario: comentario,     // Guarda el comentario en la fila
-          };
-        }
-        return row; // Devuelve las demás filas sin cambios
-      });
+    const dialogRef = this.dialog.open(ModalItemsRechazarComponent, {
+      width: '600px',
+      data: { message: '¿Está seguro de rechazar los elementos seleccionados?' }
+    });
 
-      // Mantiene los elementos seleccionados y deshabilitados
-      this.selectedRows.forEach(row => {
-        if (detalleSeleccionado.includes(row.idDetalle)) {
-          row.estadoProceso = 'Rechazado';
-          row.disabled = true;
-        }
-      });
-    }, error => {
-      console.error('Error al rechazar:', error);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {  // Si el usuario confirma el rechazo
+        console.log('Rechazo exitoso: total de EPP:', totalEpp + ' Pendiente', cantidadPendientes);
+        this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
+
+          // Actualiza el estado de los elementos seleccionados a 'Rechazado' y desactiva los checkboxes
+          this.dataSource.data = this.dataSource.data.map(row => {
+            if (detalleSeleccionado.includes(row.idDetalle)) {
+              return {
+                ...row,
+                estadoProceso: 'Rechazado', // Cambia a Rechazado
+                disabled: true,             // Desactiva el checkbox
+                comentario: comentario,     // Guarda el comentario en la fila
+              };
+            }
+            return row; // Devuelve las demás filas sin cambios
+          });
+
+          // Mantiene los elementos seleccionados y deshabilitados
+          this.selectedRows.forEach(row => {
+            if (detalleSeleccionado.includes(row.idDetalle)) {
+              row.estadoProceso = 'Rechazado';
+              row.disabled = true;
+            }
+          });
+        }, error => {
+          console.error('Error al rechazar:', error);
+        });
+      } else {
+        console.log('Rechazo cancelado');
+      }
     });
   }
+
 
 
 

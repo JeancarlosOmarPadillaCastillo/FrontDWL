@@ -9,11 +9,11 @@ import {
   MatStartDate
 } from '@angular/material/datepicker';
 import {MatButton, MatFabButton} from '@angular/material/button';
-import {MatFormField, MatHint, MatSuffix} from '@angular/material/form-field';
+import {MatFormField, MatHint, MatLabel, MatSuffix} from '@angular/material/form-field';
 import {MatIcon} from '@angular/material/icon';
 import {MatOption, provideNativeDateAdapter} from '@angular/material/core';
 import {MatSelect} from '@angular/material/select';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterLink} from '@angular/router';
 import {MatInput} from '@angular/material/input';
 import {
@@ -43,19 +43,14 @@ export interface PeriodicElement {
   imports: [
     MatCard,
     MatCardContent,
-    MatDatepickerToggle,
     MatFabButton,
     MatFormField,
-    MatHint,
     MatIcon,
     MatOption,
     MatSelect,
-    MatSuffix,
     ReactiveFormsModule,
     RouterLink,
-    MatDatepicker,
     MatInput,
-    MatDatepickerInput,
     MatCell,
     MatCellDef,
     MatColumnDef,
@@ -66,19 +61,29 @@ export interface PeriodicElement {
     MatRowDef,
     MatTable,
     MatHeaderCellDef,
-    MatButton
+    MatButton,
+    FormsModule,
+    MatLabel
   ],
   templateUrl: './recepcion-epp.component.html',
   styleUrl: './recepcion-epp.component.css',
   providers: [provideNativeDateAdapter()],
+
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecepcionEPPComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'cantidad', 'accion'];
   datasource = new MatTableDataSource<PeriodicElement>();
+  estado: string = '';
+  vencido: string = '';
+  fechaSolicitud: string = '';
 
   constructor(private http: HttpClient, private servicioFavorito:EnvioDeDatosService) {}
-
+  limpiarFormulario() {
+    this.estado = '';
+    this.vencido = '';
+    this.fechaSolicitud = '';
+  }
   ngOnInit() {
     this.listarSolicitudTrabajador().subscribe((data) => {
       // Transformar y ordenar los datos por fecha de lo más reciente a lo más antiguo
@@ -122,4 +127,5 @@ export class RecepcionEPPComponent implements OnInit {
   agregarFavorito(element: any): void {
     this.servicioFavorito.enviarDatos(element);
   }
+
 }

@@ -36,9 +36,7 @@ import {
 import {
   RequisitosAgenteSupervisadoComponent
 } from "./sst/components/requisitos-agente-supervisado/requisitos-agente-supervisado.component";
-import {
-  RevisarSolicitudEPPComponent
-} from "./jefe-directo/components/gestionEPP/revisar-solicitud-epp/revisar-solicitud-epp.component";
+
 import {
   GestionarInventarioComponent
 } from "./jefe-directo/components/gestionEPP/gestionar-inventario/gestionar-inventario.component";
@@ -92,6 +90,9 @@ import {
   VerHistorialTrabajadorComponent
 } from './trabajador/components/ver-historial-trabajador/ver-historial-trabajador.component';
 import {VerHistorialEppSstComponent} from './sst/components/ver-historial-epp-sst/ver-historial-epp-sst.component';
+import {
+  RevisarSolicitudEPPComponent
+} from './jefe-directo/components/gestionEPP/revisar-solicitud-epp/revisar-solicitud-epp.component';
 
 
 export const routes: Routes = [

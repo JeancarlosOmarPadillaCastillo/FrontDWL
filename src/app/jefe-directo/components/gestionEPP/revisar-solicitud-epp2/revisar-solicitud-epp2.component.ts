@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatCard, MatCardContent} from "@angular/material/card";
-import {MatFabButton} from "@angular/material/button";
+import {MatButton, MatFabButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {
   MatCell,
@@ -18,6 +18,10 @@ import {RechazoEppComponent} from '../rechazo-epp/rechazo-epp.component';
 import {SolicitarService} from '../../../../services/solicitar.service';
 import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
 import {HttpClient} from '@angular/common/http';
+import {NgIf} from '@angular/common';
+import {
+  ModalItemsConfirmacionComponent
+} from '../../../../jefeDirecto/components/modal-items-confirmacion/modal-items-confirmacion.component';
 
 export interface DetalleSolicitud {
   idDetalle: number;
@@ -61,6 +65,8 @@ export interface DetalleSolicitud {
     MatPaginator,
     RouterLink,
     MatCheckbox,
+    MatButton,
+    NgIf,
   ],
   templateUrl: './revisar-solicitud-epp2.component.html',
   styleUrl: './revisar-solicitud-epp2.component.css'
@@ -72,6 +78,7 @@ export class RevisarSolicitudEPP2Component implements OnInit {
     'cantidadAprobada',
     'motivoDescripcion',
     'nuevaActividad',
+    'evidencia',
     'estadoSolicitud',
   ];
   dataSource = new MatTableDataSource<DetalleSolicitud>([]);
@@ -190,30 +197,42 @@ export class RevisarSolicitudEPP2Component implements OnInit {
         totalEpp: totalEpp,
         pendienteEpp: cantidadPendientes,
       };
-      console.log('Aprobación exitosa: total de EPP:',totalEpp+'Pendiente', cantidadPendientes);
-      this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
 
-        // Actualiza el estado de los elementos seleccionados a 'Aprobado' y desactiva los checkboxes
-        this.dataSource.data = this.dataSource.data.map(row => {
-          if (detalleSeleccionado.includes(row.idDetalle)) {
-            return {
-              ...row,
-              estadoProceso: 'Aprobado', // Cambia a Aprobado
-              disabled: true,            // Desactiva el checkbox
-            };
-          }
-          return row; // Devuelve las demás filas sin cambios
-        });
+      const dialogRef = this.dialog.open(ModalItemsConfirmacionComponent, {
+        width: '600px',
+        data: { message: '¿Está seguro de aprobar los elementos seleccionados?' }
+      });
 
-        // Mantiene los elementos seleccionados y deshabilitados
-        this.selectedRows.forEach(row => {
-          if (detalleSeleccionado.includes(row.idDetalle)) {
-            row.estadoProceso = 'Aprobado';
-            row.disabled = true;
-          }
-        });
-      }, error => {
-        console.error('Error al aprobar:', error);
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) {  // Si el usuario confirma la aprobación
+          console.log('Aprobación exitosa: total de EPP:', totalEpp + ' Pendiente', cantidadPendientes);
+          this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
+
+            // Actualiza el estado de los elementos seleccionados a 'Aprobado' y desactiva los checkboxes
+            this.dataSource.data = this.dataSource.data.map(row => {
+              if (detalleSeleccionado.includes(row.idDetalle)) {
+                return {
+                  ...row,
+                  estadoProceso: 'Aprobado', // Cambia a Aprobado
+                  disabled: true,            // Desactiva el checkbox
+                };
+              }
+              return row;
+            });
+
+            // Mantiene los elementos seleccionados y deshabilitados
+            this.selectedRows.forEach(row => {
+              if (detalleSeleccionado.includes(row.idDetalle)) {
+                row.estadoProceso = 'Aprobado';
+                row.disabled = true;
+              }
+            });
+          }, error => {
+            console.error('Error al aprobar:', error);
+          });
+        } else {
+          console.log('Aprobación cancelada');
+        }
       });
     } else {
       console.warn('No hay elementos pendientes seleccionados para aprobar.');
@@ -224,6 +243,7 @@ export class RevisarSolicitudEPP2Component implements OnInit {
   rechazar(detalleSeleccionado: number[], comentario: string): void {
     const cantidadPendientes = this.dataSource.data.filter((row: DetalleSolicitud) => row.estadoProceso === 'Pendiente').length;
     const totalEpp = this.dataSource.data.length;
+
     const payload = {
       idSolicitud: this.datosRecibidos?.idSolicitud,
       idEmpleado: this.datosRecibidos?.idEmpleado,
@@ -235,59 +255,49 @@ export class RevisarSolicitudEPP2Component implements OnInit {
       totalEpp: totalEpp,
       pendienteEpp: cantidadPendientes,
     };
-    console.log('Aprobación exitosa: total de EPP:',totalEpp+'Pendiente', cantidadPendientes);
-    this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
 
-      // Actualiza el estado de los elementos seleccionados a 'Rechazado' y desactiva los checkboxes
-      this.dataSource.data = this.dataSource.data.map(row => {
-        if (detalleSeleccionado.includes(row.idDetalle)) {
-          return {
-            ...row,
-            estadoProceso: 'Rechazado', // Cambia a Rechazado
-            disabled: true,             // Desactiva el checkbox
-            comentario: comentario,     // Guarda el comentario en la fila
-          };
-        }
-        return row; // Devuelve las demás filas sin cambios
-      });
-
-      // Mantiene los elementos seleccionados y deshabilitados
-      this.selectedRows.forEach(row => {
-        if (detalleSeleccionado.includes(row.idDetalle)) {
-          row.estadoProceso = 'Rechazado';
-          row.disabled = true;
-        }
-      });
-    }, error => {
-      console.error('Error al rechazar:', error);
+    const dialogRef = this.dialog.open(ModalItemsConfirmacionComponent, {
+      width: '600px',
+      data: { message: '¿Está seguro de rechazar los elementos seleccionados?' }
     });
-  }
 
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {  // Si el usuario confirma el rechazo
+        console.log('Rechazo exitoso: total de EPP:', totalEpp + ' Pendiente', cantidadPendientes);
+        this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
 
+          // Actualiza el estado de los elementos seleccionados a 'Rechazado' y desactiva los checkboxes
+          this.dataSource.data = this.dataSource.data.map(row => {
+            if (detalleSeleccionado.includes(row.idDetalle)) {
+              return {
+                ...row,
+                estadoProceso: 'Rechazado', // Cambia a Rechazado
+                disabled: true,             // Desactiva el checkbox
+                comentario: comentario,     // Guarda el comentario en la fila
+              };
+            }
+            return row; // Devuelve las demás filas sin cambios
+          });
 
-  actualizarTabla(nuevoEstado?: string): void {
-    this.dataSource.data = this.dataSource.data.map((row: DetalleSolicitud) => {
-      if (this.selectedRows.has(row)) {
-        // Actualiza el estadoProceso solo para las filas seleccionadas
-        const updatedRow = {
-          ...row,
-          estadoProceso: nuevoEstado || row.estadoProceso, // Actualiza con el nuevo estado
-        };
-
-        // Si se aprueba o rechaza, selecciona y deshabilita el checkbox
-        if (updatedRow.estadoProceso === 'Aprobado' || updatedRow.estadoProceso === 'Rechazado') {
-          this.selectedRows.add(updatedRow); // Asegura que se mantenga seleccionado
-        }
-        return updatedRow;
+          // Mantiene los elementos seleccionados y deshabilitados
+          this.selectedRows.forEach(row => {
+            if (detalleSeleccionado.includes(row.idDetalle)) {
+              row.estadoProceso = 'Rechazado';
+              row.disabled = true;
+            }
+          });
+        }, error => {
+          console.error('Error al rechazar:', error);
+        });
+      } else {
+        console.log('Rechazo cancelado');
       }
-      return row;
     });
-
-    // Limpia las filas seleccionadas que ya no son editables
-    this.selectedRows = new Set(
-      this.dataSource.data.filter((row) => row.estadoProceso === 'Aprobado' || row.estadoProceso === 'Rechazado')
-    );
   }
+
+
+
+
 
 
 

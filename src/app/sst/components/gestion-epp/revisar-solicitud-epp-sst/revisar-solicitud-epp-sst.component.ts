@@ -13,7 +13,7 @@ import {MatCardModule} from '@angular/material/card';
   import {MatDatepicker, MatDatepickerModule, MatDatepickerToggle} from '@angular/material/datepicker';
   import {DateAdapter, MatNativeDateModule, provideNativeDateAdapter} from '@angular/material/core';
   import {RouterLink} from '@angular/router';
-  import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+  import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
   import {RevisarSolicitudService} from '../../../../services/revisar-solicitud.service';
   import {Empleado} from '../../../../sst/components/gestion-epp/solicitar-epp-sst/solicitar-epp-sst.component';
   import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
@@ -47,7 +47,7 @@ import {MatCardModule} from '@angular/material/card';
     ],
     imports: [CommonModule, MatCardModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatTableModule, MatExpansionModule, MatDialogModule, MatDatepicker, MatDatepickerToggle, RouterLink,
       MatDatepickerModule,
-      MatNativeDateModule, ReactiveFormsModule, MatPaginator],
+      MatNativeDateModule, ReactiveFormsModule, MatPaginator, FormsModule],
     providers: [
       provideNativeDateAdapter()// Asegúrate de esta línea
     ],
@@ -75,12 +75,25 @@ import {MatCardModule} from '@angular/material/card';
     ]
     expandedElement: DATA | null | undefined
     dataSource = new MatTableDataSource<Empleado>([]);
+    filtroTipoEpp: string = '';
+    filtroEstado: string = '';
+    filtroMotivo: string = '';
 
     // Controles para filtros
     tipoDocumentoFilter = new FormControl('');
     numeroDocumentoFilter = new FormControl('');
 
     constructor(private revisarSolicitudService: RevisarSolicitudService, private servicioFavorito:EnvioDeDatosService) {}
+    aplicarFiltros(): void {
+      // Filtra los datos basándote en los valores de los filtros
+      this.dataSource.data = this.dataSource.data.filter(row => {
+        return (
+          (this.filtroTipoEpp ? row.tipoDocumento.includes(this.filtroTipoEpp) : true) &&
+          (this.filtroEstado ? row.estadoProceso.includes(this.filtroEstado) : true) &&
+          (this.filtroMotivo ? row.documento.includes(this.filtroMotivo) : true)
+        );
+      });
+    }
 
     ngAfterViewInit() {
       if (this.paginator) {

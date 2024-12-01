@@ -12,7 +12,9 @@
       <mat-icon>cloud_upload</mat-icon>
     </button>
     <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none;" />
-    <p>Archivo de baja calidad no será aceptado. El tamaño debe ser menor a 5 MB.</p>
+    <p>Archivos de bajo calidad no sarán aceptados. El nombre
+      del archivo no debe ser extenso (máximo 50
+      caracteres). EI tamaño del archivo debe ser menor a 5 MB.</p>
   </div>
 
   <!-- Lista de archivos cargados -->
@@ -59,7 +61,7 @@
 <br>
 <!-- Botones inferiores -->
 <div class="contenedor-botones">
-  <button mat-dialog-close class="boton-salir">Salir</button>
+  <button mat-dialog-close class="boton-salir">Cancelar</button>
   <button *ngFor="let archivo of archivos"
           (click)="subirArchivo(archivo)"
           class="boton-buscar"

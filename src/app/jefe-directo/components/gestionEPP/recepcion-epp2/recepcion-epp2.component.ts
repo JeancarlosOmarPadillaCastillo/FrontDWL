@@ -59,7 +59,7 @@ export interface DetalleSolicitud {
   styleUrl: './recepcion-epp2.component.css'
 })
 export class RecepcionEPP2Component  implements OnInit{
-  displayedColumns: string[] = ['position', 'name','cantidad','accion','tipo','observacion'];
+  displayedColumns: string[] = ['position', 'name','cantidad','tipo','observacion'];
   dataSource = new MatTableDataSource<DetalleSolicitud>([]);
   datosRecibidos: any;
   selectedRows = new Set<DetalleSolicitud>();

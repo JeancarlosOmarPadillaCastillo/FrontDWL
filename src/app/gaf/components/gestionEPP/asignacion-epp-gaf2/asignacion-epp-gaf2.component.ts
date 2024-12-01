@@ -17,6 +17,13 @@ import {SolicitarService} from '../../../../services/solicitar.service';
 import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
 import {HttpClient} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {NgClass, NgIf, NgStyle} from '@angular/common';
+import {
+  ModalItemsRechazarComponent
+} from '../../../../jefeDirecto/components/modal-items-rechazar/modal-items-rechazar.component';
+import {
+  ModalItemsConfirmacionComponent
+} from '../../../../jefeDirecto/components/modal-items-confirmacion/modal-items-confirmacion.component';
 
 
 
@@ -36,6 +43,9 @@ export interface DetalleSolicitud {
   idEstadoProceso?: number;
   comentario?: string;
   disabled?: boolean;
+
+  error?: boolean; // Nueva propiedad para el estado de error
+  mensajeError?: string;
 }
 
 @Component({
@@ -58,7 +68,10 @@ export interface DetalleSolicitud {
     MatRowDef,
     MatRow,
     MatFabButton,
-    RouterLink
+    RouterLink,
+    NgClass,
+    NgStyle,
+    NgIf
   ],
   styleUrls: ['./asignacion-epp-gaf2.component.css']
 })
@@ -112,6 +125,16 @@ export class AsignacionEppGaf2Component implements OnInit {
     console.log('despues')
   }
 
+
+  rechazaryAsignar(): void {
+    console.log('antes')
+    this.rechazar();
+    console.log('durante')
+    this.rechazarAsignacion();
+    console.log('despues')
+  }
+
+
   aprobar(): void {
     const cantidadPendientes = this.dataSource.data.filter((row: DetalleSolicitud) => row.estadoProceso === 'Pendiente').length;
     const totalEpp = this.dataSource.data.length;
@@ -126,30 +149,41 @@ export class AsignacionEppGaf2Component implements OnInit {
         companiaSocio: "01000000",
         detalle: detalleSeleccionado,
         estado: 5, // Estado de aprobado
-        bandeja:3,
+        bandeja: 3,
         totalEpp: totalEpp,
         pendienteEpp: cantidadPendientes,
       };
-      console.log('Aprobación exitosa: Payload:', payload);
-      console.log('Aprobación exitosa: total de EPP:', totalEpp, 'Pendientes:', cantidadPendientes);
 
-      this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
-        // Actualiza el estado de todos los elementos a 'Aprobado' y desactiva los checkboxes
-        this.dataSource.data = this.dataSource.data.map(row => ({
-          ...row,
-          estadoProceso: 'Aprobado',
-          disabled: true,
-        }));
+      // Abre el modal de confirmación antes de proceder
+      const dialogRef = this.dialog.open(ModalItemsConfirmacionComponent, {
+        width: '600px',
+        data: { message: '¿Está seguro de aprobar todos los elementos seleccionados?' }
+      });
 
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) { // Si el usuario confirma la acción
+          console.log('Aprobación exitosa: Payload:', payload);
+          console.log('Aprobación exitosa: total de EPP:', totalEpp, 'Pendientes:', cantidadPendientes);
 
-      }, error => {
-        console.error('Error al aprobar:', error);
+          this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
+            // Actualiza el estado de todos los elementos a 'Aprobado' y desactiva los checkboxes
+            this.dataSource.data = this.dataSource.data.map(row => ({
+              ...row,
+              estadoProceso: 'Aprobado',
+              disabled: true,
+            }));
+          }, error => {
+            console.error('Error al aprobar:', error);
+          });
+        } else {
+          console.log('Aprobación cancelada');
+        }
       });
     } else {
       console.warn('No hay elementos para aprobar.');
     }
   }
-  rechazar(comentario: string): void {
+  rechazar(): void {
     const cantidadPendientes = this.dataSource.data.filter((row: DetalleSolicitud) => row.estadoProceso === 'Pendiente').length;
     const totalEpp = this.dataSource.data.length;
 
@@ -163,40 +197,39 @@ export class AsignacionEppGaf2Component implements OnInit {
         companiaSocio: "01000000",
         detalle: detalleSeleccionado,
         estado: 6, // Estado de rechazado
-        comentario: comentario,
         bandeja: 3,
         totalEpp: totalEpp,
         pendienteEpp: cantidadPendientes,
       };
 
-      console.log('Rechazo exitoso: total de EPP:', totalEpp, 'Pendientes:', cantidadPendientes);
+      // Abre el modal de confirmación antes de proceder
+      const dialogRef = this.dialog.open(ModalItemsRechazarComponent, {
+        width: '600px',
+        data: { message: '¿Está seguro de rechazar todos los elementos seleccionados?' }
+      });
 
-      this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
-        // Actualiza el estado de todos los elementos a 'Rechazado' y desactiva los checkboxes
-        this.dataSource.data = this.dataSource.data.map(row => ({
-          ...row,
-          estadoProceso: 'Rechazado',
-          disabled: true,
-          comentario: comentario, // Guarda el comentario en cada fila
-        }));
+      dialogRef.afterClosed().subscribe(result => {
+        if (result) { // Si el usuario confirma la acción
+          console.log('Rechazo exitoso: Payload:', payload);
 
-        // Desactiva los elementos seleccionados y actualiza su estado
-        this.selectedRows.forEach(row => {
-          if (detalleSeleccionado.includes(row.idDetalle)) {
-            row.estadoProceso = 'Rechazado';
-            row.disabled = true;
-          }
-        });
-      }, error => {
-        console.error('Error al rechazar:', error);
+          this.solicitarService.rechazarSolicitud(payload).subscribe(response => {
+            // Actualiza el estado de todos los elementos a 'Rechazado' y desactiva los checkboxes
+            this.dataSource.data = this.dataSource.data.map(row => ({
+              ...row,
+              estadoProceso: 'Rechazado',
+              disabled: true,
+            }));
+          }, error => {
+            console.error('Error al rechazar:', error);
+          });
+        } else {
+          console.log('Rechazo cancelado');
+        }
       });
     } else {
       console.warn('No hay elementos para rechazar.');
     }
   }
-
-
-
 
   aprobarAsignacion(): void {
     // Crear el body para el POST siguiendo el formato requerido
@@ -234,4 +267,61 @@ export class AsignacionEppGaf2Component implements OnInit {
     );
 
   }
+
+  validarCantidad(element: DetalleSolicitud): void {
+    if ((element.cantidadEntregada ?? 0) > (element.cantidadSolicitada ?? 0)) {
+      element.error = true; // Marcar el error
+      element.mensajeError = 'No puede brindar más de la cantidad solicitada';
+    } else {
+      element.error = false; // Limpiar el error
+      element.mensajeError = '';
+    }
+  }
+
+  rechazarAsignacion(): void {
+    // Crear el body para el POST siguiendo el formato requerido
+    const body = {
+      idEmpleado: this.datosRecibidos?.idEmpleado,
+      companiaSocio: "01000000",
+      observacion: 'comentario...', // Aquí puedes agregar un comentario más descriptivo si lo deseas
+      direccion: "direccion del cargo",
+      detalle: this.dataSource.data.map((detalle) => ({
+        idDetalleSolicitud: detalle.idDetalle,
+        idTipoEpp: detalle.idTipoEpp,
+        cantidadEntregada: 0, // Captura el valor ingresado en el input
+      }))
+    };
+
+    console.log('Body enviado al backend:', body);
+
+    // Configurar los encabezados
+    const headers = {
+      'Content-Type': 'application/json',
+
+      'ip-client': '127.0.0.1'
+    };
+
+    // Realizar la solicitud POST con encabezados personalizados
+    this.http.post(this.endpoint, body, { headers }).subscribe(
+      (response) => {
+        console.log('Asignación aprobada con éxito:', response);
+        alert('Asignación rechazada correctamente.');
+      },
+      (error) => {
+        console.error('Error al aprobar asignación:', error);
+        alert('Ocurrió un error al aprobar la asignación.');
+      }
+    );
+
+  }
+  completarCantidad(element: DetalleSolicitud): void {
+    if (!element.disabled) {
+      // Asigna el valor de cantidad solicitada al input
+      element.cantidadEntregada = element.cantidadSolicitada ?? 0;
+
+      // Deshabilita el input
+      element.disabled = true;
+    }
+  }
+
 }

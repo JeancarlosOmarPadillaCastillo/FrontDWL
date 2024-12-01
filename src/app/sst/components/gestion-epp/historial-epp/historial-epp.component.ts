@@ -78,7 +78,7 @@ export class HistorialEppComponent implements OnInit {
     }).subscribe((response: any) => {
       // Procesar los datos del JSON y mapearlos al formato adecuado
       const data = response.map((item: any) => ({
-        position: item.estado ? '27/12/24' : '25/11/24', // Ejemplo de fecha fija; ajusta según lo necesario
+        position: item.estado ? '29/12/24' : '25/11/24', // Ejemplo de fecha fija; ajusta según lo necesario
         name: item.tipoEpp.descripcion,
         weight: '1', // Ajusta si es necesario
         distrito: item.provincia, // Puedes ajustar esto como desees

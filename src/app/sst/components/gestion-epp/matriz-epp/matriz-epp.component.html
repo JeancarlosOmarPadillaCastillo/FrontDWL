@@ -23,31 +23,26 @@
   </mat-card>
 
   <br>
-  <table border="1">
-    <thead>
-    <tr>
-      <th>Descripción</th>
-      <th>Cantidad</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td>Botín dieléctricos</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>Camisa de trabajo</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>Chaleco Osinergmin</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <td>Bloqueador Solar</td>
-      <td>2</td>
-    </tr>
-    </tbody>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="tipoEppDescripcion">
+      <th mat-header-cell *matHeaderCellDef> Tipo de EPP</th>
+      <td mat-cell *matCellDef="let element"> {{element.descripcion}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="cantidad">
+      <th mat-header-cell *matHeaderCellDef> Cantidad </th>
+      <td mat-cell *matCellDef="let element"> {{element.cantidad}} </td>
+    </ng-container>
+
+
+    <!-- Header row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" style="background-color: #1A4DB3; color:white"></tr>
+
+    <!-- Data rows -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
 

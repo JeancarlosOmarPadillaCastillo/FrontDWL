@@ -81,7 +81,7 @@ public firstOptionSelected = 'Option 1'
   // Controles para filtros
   tipoDocumentoFilter = new FormControl('');
   numeroDocumentoFilter = new FormControl('');
-
+  vencido = new FormControl('');
   constructor(private revisarSolicitudService: RevisarSolicitudService, private servicioFavorito:EnvioDeDatosService) {}
 
   ngAfterViewInit() {

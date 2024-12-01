@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -11,7 +11,6 @@ import {
 import {MatDialogActions, MatDialogClose, MatDialogContent} from "@angular/material/dialog";
 import {MatOption} from "@angular/material/core";
 import {MatSelect} from "@angular/material/select";
-import {HttpClient} from '@angular/common/http';
 export interface PeriodicElement {
   name: string;
   position: string;
@@ -19,10 +18,13 @@ export interface PeriodicElement {
 }
 
 // Los datos que se mostrarán en la tabla, incluyendo las nuevas columnas
-export interface PeriodicElement {
-  position: string;
-  name: string;
-}
+const ELEMENT_DATA: PeriodicElement[] = [
+  { position:'Casco de seguridad' , name: '1'},
+  { position:'Botín dieléctricos' , name: '1'},
+  { position:'Bloqueador Solar' , name: '1'},
+  { position:'Botas de cuero caña alta' , name: '2'},
+
+];
 @Component({
   selector: 'app-maestro-asignaciones-epp',
   standalone: true,
@@ -46,30 +48,9 @@ export interface PeriodicElement {
   templateUrl: './maestro-asignaciones-epp.component.html',
   styleUrl: './maestro-asignaciones-epp.component.css'
 })
-export class MaestroAsignacionesEppComponent implements OnInit {
+export class MaestroAsignacionesEppComponent {
   displayedColumns: string[] = ['position', 'name'];
-  dataSource = new MatTableDataSource<PeriodicElement>([]);
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit(): void {
-    this.getData();
-  }
-
-  getData(): void {
-    const url = 'http://localhost:8091/sge-consulta-maestras-api/sge/epp/asignaciones/trabajador';
-    this.http.get<any>(url).subscribe(
-      (response) => {
-        // Procesa los datos para adaptarlos a la tabla
-        const data = response.map((item: any) => ({
-          position: item.tipoEpp.descripcion, // tipo de EPP
-          name: '1' // cantidad asignada como string
-        }));
-        this.dataSource.data = data;
-      },
-      (error) => {
-        console.error('Error al obtener los datos:', error);
-      }
-    );
-  }
+  // Usamos los datos con las nuevas columnas
+  dataSource = new MatTableDataSource(ELEMENT_DATA);
 }

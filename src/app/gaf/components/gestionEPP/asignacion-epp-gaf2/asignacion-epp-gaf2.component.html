@@ -85,14 +85,28 @@
   <ng-container matColumnDef="nuevaActividad">
     <th mat-header-cell *matHeaderCellDef> Cantidad a entregar </th>
     <td mat-cell *matCellDef="let element">
-      <input type="number" [(ngModel)]="element.cantidadEntregada" min="0" />
+      <input
+        type="text"
+        [(ngModel)]="element.cantidadEntregada"
+        (ngModelChange)="validarCantidad(element)"
+        [ngStyle]="{
+        'border-color': element.error ? 'red' : '',
+        'color': element.error ? 'red' : ''
+      }"
+      />
+      <div *ngIf="element.error" style="color: red; font-size: 12px;">
+        {{ element.mensajeError }}
+      </div>
     </td>
   </ng-container>
+
+
+
 
   <!-- Estado Solicitud Column -->
   <ng-container matColumnDef="estadoSolicitud">
     <th mat-header-cell *matHeaderCellDef> Vida util aproximada </th>
-    <td mat-cell *matCellDef="let element"> {{ element.estadoProceso }} </td>
+    <td mat-cell *matCellDef="let element"> {{ element.vidaUtil }} </td>
   </ng-container>
 
 
@@ -110,9 +124,9 @@
   </button>
   <button mat-fab extended (click)="aprobaryAsignar()">
     <span class="button-icon"><i style="color:white" class="fa-solid fa-file-circle-check"></i></span>
-    Aprobar
+    Registrar
   </button>
-  <button mat-fab extended>
+  <button mat-fab extended (click)="rechazaryAsignar()">
     <span class="button-icon"><i  style="color:white" class="fa-regular fa-file-excel"></i></span> <!-- Icono de cancelar -->
     Rechazar
   </button>

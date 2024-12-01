@@ -76,6 +76,9 @@ export class SolicitarEppSst2Component implements OnInit{
   tipoEPP: any[] = [];
   tipoEPPNuevo: any[] = []; // Aquí almacenamos los tipos de EPP para un nuevo trabajador
   trabajadores: any[] = [];
+  public listEvidencia: Array<any> = [];
+
+  obtainFileData: any;
 
   selectedMotivo: string = '';
   selectedTipoEPP: string = '';
@@ -109,7 +112,30 @@ export class SolicitarEppSst2Component implements OnInit{
       this.motivos = response;
     });
   }
+  readonly dialog = inject(MatDialog);
+  adjuntarEvidencia(): void {
+    const dialogRef = this.dialog.open(AdjuntarDesgasteEppComponent);
 
+    dialogRef.componentInstance.evidenciaGuardada.subscribe((evidencia: any) => {
+      console.log("Evidencia recibida:", evidencia);  // Verifica que recibes el archivo correctamente
+      this.obtainFileData = evidencia
+      this.evidenciaAdjunta = true;
+      // Aquí guardamos el uuId y el fileName de la evidencia en el array de evidencias
+      this.listEvidencia.push(evidencia);  // Guarda el uuId y el filename
+
+      // Si hay evidencia asociada, actualizar la columna "Evidencia" en la tabla
+      const index = this.dataSource.data.findIndex((item: any) => item.position === this.selectedTipoEPP);
+
+      if (index !== -1) {
+        // Aquí asignamos el uuId y el filename de la evidencia
+        this.dataSource.data[index].age = `${evidencia.fileName}`;
+        // Formato: uuId - filename
+        console.log('Datos de la tabla para evidencia...', this.dataSource.data);
+        // Aquí actualizas correctamente los datos de la tabla
+        this.dataSource = new MatTableDataSource<PeriodicElement>(this.dataSource.data);
+      }
+    });
+  }
   // Cargar tipos de EPP generales
   loadTipoEPP(): void {
     this.solicitarService.listarTipooEPP().subscribe((response) => {

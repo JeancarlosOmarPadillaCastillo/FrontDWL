@@ -99,7 +99,19 @@
     <th mat-header-cell *matHeaderCellDef> Nueva Actividad </th>
     <td mat-cell *matCellDef="let element"> {{ element.nuevaActividad || '--' }} </td>
   </ng-container>
-
+  <!-- Columna de Evidencia -->
+  <ng-container matColumnDef="evidencia">
+    <th mat-header-cell *matHeaderCellDef> Evidencia </th>
+    <td mat-cell *matCellDef="let element">
+      <!-- Verifica si el motivo de solicitud es 'Desgaste de EPP' -->
+      <ng-container *ngIf="element.motivoDescripcion === 'Desagaste de EPP'">
+        <button mat-button>
+          <mat-icon>visibility</mat-icon>
+          Ver documento
+        </button>
+      </ng-container>
+    </td>
+  </ng-container>
   <!-- Stock Column -->
   <ng-container matColumnDef="stock">
     <th mat-header-cell *matHeaderCellDef> Stock </th>
@@ -113,7 +125,7 @@
   </ng-container>
 
   <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef aria-label="row action">&nbsp;</th>
+    <th mat-header-cell *matHeaderCellDef aria-label="row action">Acciòn</th>
     <td mat-cell *matCellDef="let element">
       <div class="animacion-acciones">
         <button mat-button (click)="expandedElement = expandedElement === element ? null : element">
@@ -132,7 +144,7 @@
         <table mat-table [dataSource]="[{}]" class="table-detail">
           <ng-container matColumnDef="names">
             <th mat-header-cell *matHeaderCellDef mat-sort-header>Compatibilidad segun Matriz EPP  </th>
-            <td mat-cell *matCellDef="let data"> Compatible </td>
+            <td mat-cell *matCellDef="let data">  </td>
           </ng-container>
           <tr mat-header-row *matHeaderRowDef="definitionCellExpanded"></tr>
           <tr mat-row *matRowDef="let row; columns: definitionCellExpanded;"></tr>

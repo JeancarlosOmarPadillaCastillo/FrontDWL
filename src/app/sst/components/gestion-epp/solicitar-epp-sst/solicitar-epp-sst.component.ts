@@ -27,6 +27,7 @@ import {
 } from '../../../../jefe-directo/components/busqueda-avanzada/busqueda-avanzada.component';
 import {RevisarSolicitudService} from '../../../../services/revisar-solicitud.service';
 import {EnvioDeDatosService} from '../../../../services/envio-de-datos.service';
+import {MatPaginator} from '@angular/material/paginator';
 
 export interface Empleado {
   tipoDocumento: string;     // Tipo de documento
@@ -48,7 +49,7 @@ export interface Empleado {
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
-  imports: [CommonModule, MatCardModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatTableModule, MatExpansionModule, MatDialogModule, MatDatepicker, MatDatepickerToggle, RouterLink, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MatCardModule, MatSelectModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatTableModule, MatExpansionModule, MatDialogModule, MatDatepicker, MatDatepickerToggle, RouterLink, FormsModule, ReactiveFormsModule, MatPaginator],
 
   templateUrl: './solicitar-epp-sst.component.html',
   styleUrl: './solicitar-epp-sst.component.css'
@@ -97,7 +98,7 @@ export class SolicitarEppSstComponent implements OnInit{
   }
 
   cargarDatos(): void {
-    this.revisarSolicitudService.listarSolicutudJefeAcargo().subscribe({
+    this.revisarSolicitudService.listarSolicutudJefe().subscribe({
       next: (data: Empleado[]) => {
         this.dataSource.data = data;
         console.log('Datos cargados:', this.dataSource.data);

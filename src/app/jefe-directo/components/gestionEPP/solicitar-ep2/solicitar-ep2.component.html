@@ -91,8 +91,8 @@
 
       <!-- Botón para adjuntar evidencia -->
       <div *ngIf="selectedMotivo === '003'" class="row">
-        <button mat-raised-button color="primary">
-          <mat-icon>attachment</mat-icon> Adjuntar Evidencia
+        <button (click)="adjuntarEvidencia()" mat-raised-button color="primary">
+          <mat-icon>attachment</mat-icon> Adjuntar Archivos
         </button>
       </div>
 

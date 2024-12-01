@@ -19,7 +19,7 @@ export class RevisarSolicitudService {
     return this.http.get(`http://localhost:8095/sge-solicitud-epp-api/sge/solicitudes?vencido=1&bandeja=2&idEmpleado=286&fechaFin=2024-12-30&fechaInicio=2024-11-18`);
   }
   listarRecepcionTrabajador(): Observable<any> {
-    return this.http.get(`http://localhost:8095/sge-solicitud-epp-api/sge/solicitud/historial/trabajador?idEmpleado=286&fechaInicio=2024-11-12&fechaFin=2024-11-30`);
+    return this.http.get(`http://localhost:8095/sge-solicitud-epp-api/sge/solicitud/historial/trabajador?idEmpleado=17030&fechaInicio=2024-11-12&fechaFin=2024-11-30`);
   }
   listarSolicutudJefeAcargo(): Observable<any> {
     return this.http.get(`http://localhost:8081/trabajadores/`);
